@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EdgeScribe - Your Private AI Meeting Assistant</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand-primary: #4F46E5;
+            --brand-electric: #6366F1;
+            --accent-cyan: #0284C7;
+            --accent-sky: #38BDF8;
+            --bg-dark: #0F172A;
+            --card-dark: #1E293B;
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --status-mint: #10B981;
+            --status-amber: #F59E0B;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark), var(--card-dark));
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(244, 63, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+        }
+
+        @keyframes wave {
+            0%, 100% { height: 8px; }
+            50% { height: 24px; }
+        }
+
+        /* Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-icon {
+            color: var(--accent-sky);
+            font-size: 1.8rem;
+            line-height: 1;
+        }
+
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            margin-left: 32px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent-sky);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 0 120px;
+            gap: 60px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-sky);
+            padding: 6px 16px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent-sky), var(--brand-electric));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-electric));
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.5);
+        }
+
+        .powered-by {
+            margin-top: 24px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* CSS App Mockup */
+        .hero-visual {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .app-mockup {
+            background: var(--card-dark);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            width: 320px;
+            height: 550px;
+            padding: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .recording-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #F43F5E;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #F43F5E;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .app-transcript {
+            flex: 1;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .app-transcript p {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 12px;
+            border-radius: 12px;
+            line-height: 1.5;
+        }
+
+        .waveform {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            margin-top: auto;
+            margin-bottom: 20px;
+            height: 40px;
+        }
+
+        .wave-bar {
+            width: 6px;
+            background: var(--accent-sky);
+            border-radius: 9999px;
+            animation: wave 1.2s infinite ease-in-out;
+        }
+        
+        .wave-bar:nth-child(1) { animation-delay: 0.0s; }
+        .wave-bar:nth-child(2) { animation-delay: 0.2s; }
+        .wave-bar:nth-child(3) { animation-delay: 0.4s; }
+        .wave-bar:nth-child(4) { animation-delay: 0.6s; }
+        .wave-bar:nth-child(5) { animation-delay: 0.8s; }
+
+        .app-summary-card {
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: auto;
+        }
+
+        .app-summary-card h4 {
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 100px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+
+        /* Grid updated to support 4-in-a-row or 2x2 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+        
+        @media (min-width: 768px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1100px) {
+            .features-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .feature-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 32px 24px;
+            transition: transform 0.3s, background 0.3s;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(30, 41, 59, 0.8);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 100px 0 140px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--card-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 48px 40px;
+            position: relative;
+        }
+
+        .pricing-card.premium {
+            background: linear-gradient(180deg, rgba(30, 41, 59, 1) 0%, rgba(15, 23, 42, 1) 100%);
+            border: 2px solid var(--brand-electric);
+            box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.3);
+            transform: scale(1.05);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--brand-electric);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 24px 0 8px;
+            color: var(--text-primary);
+        }
+
+        .price-sub {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 32px;
+        }
+
+        .pricing-features {
+            list-style: none;
+        }
+
+        .pricing-features li {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--accent-sky);
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 900px) {
+            .hero { flex-direction: column; text-align: center; gap: 40px;}
+            .hero p { margin: 0 auto 40px; }
+            .pricing-card.premium { transform: scale(1); }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 3rem; }
+            nav a { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <header>
+            <div class="logo">
+                <span class="logo-icon">⬡</span> EdgeScribe
+            </div>
+            <nav>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">100% Offline AI Assistant</div>
+                <h1>Your Meetings, <br><span>Fully Private.</span></h1>
+                <p>Record, transcribe, and summarize your most important conversations entirely on your device. Zero cloud uploads, zero subscriptions.</p>
+                
+                <a href="#" class="btn" id="downloadBtn">Get it on Google Play</a>
+                
+                <div class="powered-by">
+                    <span style="color: var(--status-mint);">●</span> Powered by Business Research & Applications Limited
+                </div>
+            </div>
+
+            <!-- CSS App Mockup -->
+            <div class="hero-visual">
+                <div class="app-mockup">
+                    <div class="app-header">
+                        <div class="recording-indicator">
+                            <div class="dot"></div>
+                            Recording
+                        </div>
+                        <div class="mono" style="color: var(--text-secondary); font-size: 0.8rem;">04:22</div>
+                    </div>
+                    
+                    <div class="app-transcript">
+                        <p><strong>Team:</strong> So we need to finalize the quarterly roadmap by Friday.</p>
+                        <p><strong>You:</strong> Agreed. I will draft the initial timeline tomorrow morning.</p>
+                    </div>
+
+                    <div class="waveform">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                    </div>
+
+                    <div class="app-summary-card">
+                        <h4>✨ Live Summary Insight</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-secondary);">Action Item detected: Draft timeline by tomorrow morning.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits/Features Section -->
+        <section id="features" class="features-section">
+            <div class="section-header">
+                <h2>Designed for uncompromising privacy.</h2>
+                <p>Powerful artificial intelligence, running directly in your pocket.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Absolute Privacy</h3>
+                    <p>No cloud servers or API calls. Your audio and transcripts are processed entirely on your phone, guaranteeing your data never leaves your hands[cite: 2].</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔋</div>
+                    <h3>Battery Optimized</h3>
+                    <p>Intelligent voice detection automatically pauses the processing engine during moments of silence, allowing your device to rest and saving battery life[cite: 2].</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Background Reliability</h3>
+                    <p>Keep taking notes or let your screen turn off. A secure foreground service ensures your recording continues flawlessly in the background without being interrupted[cite: 2].</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧹</div>
+                    <h3>Smart Storage</h3>
+                    <p>Never worry about running out of space. Heavy temporary audio files are automatically purged the exact moment your lightweight text summary is created[cite: 2].</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="pricing-section">
+            <div class="section-header">
+                <h2>Simple, transparent pricing.</h2>
+                <p>Start for free. Upgrade once. No monthly subscriptions.</p>
+            </div>
+
+            <div class="pricing-grid">
+                
+                <!-- Free Tier -->
+                <div class="pricing-card">
+                    <h3>Free Tier</h3>
+                    <div class="price">$0</div>
+                    <div class="price-sub">Forever free</div>
+                    <ul class="pricing-features">
+                        <li>Unlimited offline speech-to-text transcription[cite: 2]</li>
+                        <li>Real-time active voice detection[cite: 2]</li>
+                        <li>Flawless background recording[cite: 2]</li>
+                        <li>Complete on-device privacy[cite: 2]</li>
+                    </ul>
+                </div>
+                
+                <!-- Pro Tier -->
+                <div class="pricing-card premium">
+                    <div class="popular-badge">Pro Experience</div>
+                    <h3 style="color: var(--accent-sky);">EdgeScribe Pro</h3>
+                    <div class="price">One-Time</div>
+                    <div class="price-sub">Unlock intelligent analysis</div>
+                    <ul class="pricing-features">
+                        <li><strong>Everything in Free, plus:</strong></li>
+                        <li>Intelligent, structured meeting summaries[cite: 2]</li>
+                        <li>Automated key decisions & action items[cite: 2]</li>
+                        <li>Tap timestamps to jump directly to moments[cite: 2]</li>
+                        <li>Export and share notes directly to your team[cite: 2]</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Business Research & Applications Limited. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Simulate Play Store Click
+        document.getElementById('downloadBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Redirecting to the Google Play Store...');
+        });
+
+        // Smooth Scroll for Navigation
+        document.querySelectorAll('a[href^=\'#\']').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
