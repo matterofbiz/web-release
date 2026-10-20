@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EdgeDraft User Guide</title>
+<style>
+:root { color-scheme: light dark; --bg:#fff; --fg:#1b2430; --muted:#5b6675; --line:#d8dee6; --accent:#3b4fd8; --code:#eef1f5; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0f172a; --fg:#e2e8f0; --muted:#94a3b8; --line:#2a3650; --accent:#7dd3fc; --code:#1e293b; } }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+main { max-width:46rem; margin:0 auto; padding:2rem 1.25rem 4rem; }
+h1 { font-size:1.9rem; line-height:1.25; } h2 { font-size:1.25rem; margin-top:2.2rem; padding-top:.4rem; border-top:1px solid var(--line); scroll-margin-top:1rem; }
+a { color:var(--accent); } code { background:var(--code); padding:.1em .35em; border-radius:4px; font-size:.9em; }
+.table { overflow-x:auto; } table { border-collapse:collapse; width:100%; font-size:.95rem; }
+th,td { border:1px solid var(--line); padding:.5rem .65rem; text-align:left; vertical-align:top; } th { background:var(--code); }
+nav.toc { background:var(--code); border-radius:10px; padding:.9rem 1.2rem; margin:1.5rem 0; }
+nav.toc strong { display:block; margin-bottom:.3rem; } nav.toc ol { margin:0; padding-left:1.3rem; columns:2; column-gap:2rem; } nav.toc li { break-inside:avoid; }
+@media (max-width: 36rem) { nav.toc ol { columns:1; } }
+</style>
+</head>
+<body><main>
+<h1 id="edgedraft-user-guide">EdgeDraft User Guide</h1>
+<p><strong>Last updated:</strong> October 2026 · <em>EdgeDraft 1.0 for Android</em></p>
+<p>EdgeDraft turns spoken meetings into text, summaries and action items, <strong>on your phone</strong>. Your recordings and notes are never sent to a server. This guide shows how to use it.</p>
+<p><em>Names in bold, like</em> <strong>Summaries</strong>, <em>are buttons and screens exactly as they appear in the app.</em></p>
+<nav class="toc"><strong>In this guide</strong><ol><li><a href="#what-you-need">What you need</a></li><li><a href="#free-and-pro">Free and Pro</a></li><li><a href="#1-getting-started">Getting started</a></li><li><a href="#2-recording-a-meeting">Recording a meeting</a></li><li><a href="#3-reading-and-searching-your-meetings">Reading and searching your meetings</a></li><li><a href="#4-summaries-pro">Summaries (Pro)</a></li><li><a href="#5-saying-who-spoke">Saying who spoke</a></li><li><a href="#6-tags-pro">Tags (Pro)</a></li><li><a href="#7-people">People</a></li><li><a href="#8-exporting-and-sharing-pro">Exporting and sharing (Pro)</a></li><li><a href="#9-your-privacy">Your privacy</a></li><li><a href="#10-when-something-goes-wrong">When something goes wrong</a></li><li><a href="#contact">Contact</a></li></ol></nav>
+<h2 id="what-you-need">What you need</h2>
+<ul>
+<li>An Android phone running Android 7.0 or later, with a 64-bit processor from roughly 2019 or newer. If your processor is not supported, <strong>Status &amp; Models</strong> tells you.</li>
+<li>About 1.4 GB of free storage for the two AI models, and an internet connection (Wi-Fi is best) <strong>once</strong>, to download them.</li>
+<li>For summaries, about 2 GB of free memory. On a phone with 4 GB of memory, close other apps before you start a summary.</li>
+<li>English speech. The speech model is English only.</li>
+</ul>
+<h2 id="free-and-pro">Free and Pro</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th></th>
+<th>Free</th>
+<th>Pro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Record and transcribe, as much as you like</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Save meetings, read transcripts, search</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Name who said what</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>People directory</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Summaries: briefing, decisions, action items, topics</td>
+<td></td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Tags, automatic tagging and tagging rules</td>
+<td></td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Export to PDF, text or Markdown; copy; share</td>
+<td></td>
+<td>✓</td>
+</tr>
+<tr>
+<td>Recent Speech panel while recording</td>
+<td></td>
+<td>✓</td>
+</tr>
+</tbody>
+</table></div>
+<p>Pro is a one-time purchase through Google Play, when it is offered in your version of the app.</p>
+<h2 id="1-getting-started">1. Getting started</h2>
+<ol>
+<li>Open EdgeDraft. The first time, read the agreement, tick the box and tap <strong>Accept &amp; Continue</strong>.</li>
+<li>Download the AI models. Tap <strong>Auto-Download Both Models</strong> on the banner, or open <strong>Status &amp; Models</strong>, then <strong>Offline Models</strong>. Keep the app open on Wi-Fi. When both show <strong>Installed</strong>, you are ready. You will not need the internet again to record or summarise.</li>
+<li>The first time you record, the app reminds you to record only people who know and agree. It then asks for permission to use the microphone (and, on Android 13 and later, to show notifications, which is how it shows that it is recording).</li>
+</ol>
+<h2 id="2-recording-a-meeting">2. Recording a meeting</h2>
+<ol>
+<li><em>Optional:</em> under <strong>Meeting Attendees</strong>, tap <strong>Add Attendee</strong> to list who is there. This makes it quicker to name speakers later. You can also pick people from the <strong>People</strong> tab (section 7).</li>
+<li>Tap the round microphone button (<strong>Start Recording</strong>) on the <strong>Live Recording</strong> screen.</li>
+<li>Speak normally. Lines of text appear as people talk, each with a time stamp.</li>
+</ol>
+<h3 id="tips-for-good-text">Tips for good text</h3>
+<ul>
+<li>Keep the phone close to the speakers, and put it on a table rather than holding it.</li>
+<li>If the app hears almost nothing for 15 seconds, an amber note asks you to move the phone closer or speak up.</li>
+<li>Words that were heard but too faint to read are marked <em>unclear</em> instead of being left as a silent gap.</li>
+<li>Names, product names and technical terms are the words most often misheard. Check them.</li>
+</ul>
+<h3 id="with-the-screen-off">With the screen off</h3>
+<p>Recording continues, and a notification stays visible while it does. Some phones have battery savers that stop apps; if recordings stop with the screen off, exempt EdgeDraft in your phone's battery settings.</p>
+<h3 id="stopping">Stopping</h3>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Button</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Stop and save</strong> (the red square)</td>
+<td>Stops and saves the meeting. No summary yet.</td>
+</tr>
+<tr>
+<td><strong>Stop &amp; Summarise</strong> (Pro)</td>
+<td>Stops, saves, and starts writing the summary straight away.</td>
+</tr>
+</tbody>
+</table></div>
+<p>If the app is closed or the phone restarts before you saved, the text is still there next time, with <strong>Save</strong>, <strong>Save &amp; Summarise</strong> and <strong>Discard</strong>.</p>
+<p>The audio itself is never kept. It is turned into text and thrown away straight away.</p>
+<h2 id="3-reading-and-searching-your-meetings">3. Reading and searching your meetings</h2>
+<p>Open the <strong>Summaries</strong> tab. Your meetings are listed with their date and tags.</p>
+<ul>
+<li>Type in the search box (<em>Search completed discussions...</em>) to search titles, tags, summaries and the full text of every meeting. The counter shows how many match, for example <em>2 of 5</em>. Tap <strong>Clear</strong> to start again.</li>
+<li>Tap a tag to show only meetings with that tag.</li>
+<li>Tap a meeting to open it. Free users open on the <strong>Transcript</strong>; Pro users open on the <strong>Executive Summary</strong>.</li>
+</ul>
+<h2 id="4-summaries-pro">4. Summaries (Pro)</h2>
+<p>A summary is written on your phone, so it takes a while: roughly a minute for a one-minute recording, about 4 minutes for 15 minutes, and 15 to 20 minutes for an hour, on a mid-range phone. The first summary on a phone also does a one-time speed check of up to a minute.</p>
+<p>Every meeting shows one of these: <strong>No summary</strong>, <strong>Writing…</strong>, <strong>Summary ready</strong>, <strong>Summary failed</strong> or <strong>Needs model</strong>.</p>
+<ol>
+<li>Open a meeting that shows <strong>No summary</strong> and tap <strong>Create summary</strong>. A progress bar shows each step, and <strong>Cancel</strong> stops it.</li>
+<li>If it stops or fails, tap <strong>Try again</strong>. If the app was closed while it was writing, it shows as failed and <strong>Try again</strong> restarts it.</li>
+<li>If it says <strong>Needs model</strong>, open <strong>Status &amp; Models</strong> and download the models (section 1).</li>
+</ol>
+<p><strong>Recording and summarising do not run at the same time,</strong> because the phone does not have the memory for both. If you start recording while a summary is being written, the app asks first and stops the summary, which you can restart afterwards.</p>
+<p>The <strong>Executive Summary</strong> tab shows:</p>
+<ul>
+<li><strong>Executive Briefing</strong>: a short overview. <strong>Redo</strong> writes it again.</li>
+<li><strong>Speakers</strong>: the people you have named, with each person's share of the speech.</li>
+<li><strong>Key Decisions</strong>: with the reasoning and a time stamp.</li>
+<li><strong>Action Items &amp; Deliverables</strong>: with the owner, the due date and a time stamp. If the transcript does not say who or when, it shows <em>Unassigned</em> or <em>Not specified</em> instead of guessing.</li>
+<li><strong>Topics Discussed</strong>.</li>
+</ul>
+<p>Tap any time stamp to jump to that moment in the <strong>Transcript</strong>.</p>
+<p><strong>Treat summaries as a first draft.</strong> A small on-device model can miss points, mix up who said what, repeat a transcript mistake, or state something nobody said. Check anything important against the transcript.</p>
+<h2 id="5-saying-who-spoke">5. Saying who spoke</h2>
+<p>EdgeDraft does not recognise voices, so lines start with no speaker. You choose who said what, during the meeting or afterwards.</p>
+<ol>
+<li>On the <strong>Transcript</strong>, tap <strong>Assign speaker</strong> on a line (or tap the name, to change it).</li>
+<li>Choose how far the change goes: <strong>This line only</strong>, <strong>This line and the lines after it that are labelled the same</strong>, or <strong>Every line labelled the same</strong>. The number beside each choice is how many lines it changes.</li>
+<li>Pick someone from the list, or type a name, and tap <strong>Apply Custom Name</strong>.</li>
+</ol>
+<p>Names appear in the transcript, in the <strong>Speakers</strong> card and in exports. Tapping a name in <strong>Speakers</strong> shows only that person's lines.</p>
+<h2 id="6-tags-pro">6. Tags (Pro)</h2>
+<p>Tags help you find meetings later.</p>
+<ul>
+<li>In an open meeting, tap <strong>Add</strong> to add your own tag, or the small x on a tag to remove it.</li>
+<li><strong>Auto-Tag</strong> chooses tags for you from what was said.</li>
+<li><strong>Rules</strong> (or the <strong>Tagging Engine</strong> button above the list) opens <strong>Auto-Tagging Rules &amp; Keywords</strong>, where you can make your own categories, add keywords, set how strongly each counts, and tap <strong>Re-classify Current Session</strong> or <strong>Re-classify All</strong> to apply your rules. <strong>Reset Defaults</strong> puts everything back.</li>
+</ul>
+<h2 id="7-people">7. People</h2>
+<p>Open the <strong>People</strong> tab to keep a list of the people you meet.</p>
+<ol>
+<li>Tap <strong>Add Person</strong> and enter a name, role, department and email.</li>
+<li>Tick the box on each person who is in this meeting and tap <strong>Start Meeting Roster</strong>. They are added to <strong>Meeting Attendees</strong> and are easy to pick when you name speakers.</li>
+<li>Use the pencil icon on a person to edit them, or the bin icon to delete them.</li>
+</ol>
+<p>The list is stored on your phone only, encrypted.</p>
+<h2 id="8-exporting-and-sharing-pro">8. Exporting and sharing (Pro)</h2>
+<p>Open a meeting. The buttons at the top are:</p>
+<ul>
+<li><strong>Export .pdf</strong>: formatted meeting minutes.</li>
+<li><strong>Export .txt</strong>: plain text of the summary and transcript.</li>
+<li><strong>.md</strong>: Markdown, with headings and a checklist of action items.</li>
+<li><strong>Copy</strong>: puts the summary and transcript on the clipboard.</li>
+<li><strong>Share</strong>: sends the text to another app.</li>
+</ul>
+<p>After an export a card says <strong>Saved</strong> and shows where the file went, for example <code>Downloads/EdgeDraft/EdgeDraft_Budget_meeting_2026-10-08.pdf</code>. Tap <strong>Open</strong> to view it or <strong>Share</strong> to send it. <strong>Dismiss</strong> closes the card. You can always find your files in the <em>Files</em> app, under <em>Downloads</em>, then <em>EdgeDraft</em>. Exporting the same meeting twice makes a second file ending in <em>(1)</em>.</p>
+<p>Exported files are <strong>not encrypted</strong>, and they stay on the phone until you delete them. Uninstalling EdgeDraft does not remove them.</p>
+<h2 id="9-your-privacy">9. Your privacy</h2>
+<ul>
+<li>Your recordings are processed on the phone and never saved or sent anywhere.</li>
+<li>Your meetings are stored only on your phone, encrypted. EdgeDraft has <strong>no app lock</strong>, so anyone who can unlock your phone can open the app.</li>
+<li>The app has no accounts, no analytics and no advertising. The internet is used only to download the AI models and by Google Play.</li>
+<li>Android's cloud backup is switched off for EdgeDraft. A new phone starts empty, so export anything important first.</li>
+<li>To remove everything, clear EdgeDraft's storage in Android Settings, or uninstall it.</li>
+</ul>
+<p>The full Privacy Policy is linked from EdgeDraft's page on Google Play. The agreement and the open-source licences are under <strong>Help</strong>.</p>
+<h2 id="10-when-something-goes-wrong">10. When something goes wrong</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>What you see</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The microphone does not work, or the app says permission was denied</td>
+<td>In Android Settings, open Apps, then EdgeDraft, then Permissions, and allow the microphone.</td>
+</tr>
+<tr>
+<td>A summary says <strong>Needs model</strong></td>
+<td>Open <strong>Status &amp; Models</strong>, then <strong>Offline Models</strong>, and download both models on Wi-Fi.</td>
+</tr>
+<tr>
+<td>The text has a lot of mistakes</td>
+<td>Hold the phone closer, reduce background noise, and check names and technical terms.</td>
+</tr>
+<tr>
+<td>An amber note says it hears very little</td>
+<td>Move the phone nearer the speakers or ask people to speak up.</td>
+</tr>
+<tr>
+<td>Parts are marked <em>unclear</em></td>
+<td>Those words were too faint to read. Move closer next time; they are left out of summaries.</td>
+</tr>
+<tr>
+<td>A summary is very slow</td>
+<td>That is normal on a phone, especially for long meetings (section 4). If the phone gets hot, give it a rest; <strong>Status &amp; Models</strong> shows its temperature state.</td>
+</tr>
+<tr>
+<td>A summary <strong>failed</strong></td>
+<td>Tap <strong>Try again</strong>. If it keeps failing, close other apps to free memory.</td>
+</tr>
+<tr>
+<td>A message about the processor appears on <strong>Status &amp; Models</strong></td>
+<td>Your phone's processor is too old for the on-device models.</td>
+</tr>
+<tr>
+<td>An export cannot be found</td>
+<td>Open the <em>Files</em> app, then <em>Downloads</em>, then <em>EdgeDraft</em>.</td>
+</tr>
+<tr>
+<td>A button says it needs Pro</td>
+<td>Exports, summaries and tags are Pro features (see <em>Free and Pro</em>).</td>
+</tr>
+<tr>
+<td>Meetings missing after reinstalling or changing phone</td>
+<td>Meetings are not backed up. Export important ones first.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="contact">Contact</h2>
+<p>Questions or problems: <strong>support@matterof.biz</strong>. Please say which phone and Android version you use.</p>
+</main></body>
+</html>
