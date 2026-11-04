@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>spheRate — Sovereign 360° Personal Feedback & Continuous Reputation Vault</title>
+  <meta name="description" content="Own your reputation across Professional, Educational, Personal, and Civic spheres. Private, zero-knowledge 360° feedback and Personal Net Promoter Score." />
+  <meta property="og:title" content="spheRate — Sovereign 360° Personal Feedback" />
+  <meta property="og:description" content="A private, user-owned Net Promoter Score vault for your whole life. Client-side encryption, four life spheres, and zero-knowledge storage." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+
+  <!-- Google Fonts: Plus Jakarta Sans (Display), Manrope (Body), JetBrains Mono (Metrics & Tabular) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-canvas: #07090e;
+      --bg-surface: #0e131f;
+      --bg-surface-elevated: #141c2e;
+      --bg-surface-subtle: rgba(255, 255, 255, 0.03);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(99, 102, 241, 0.5);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-indigo: #6366f1;
+      --accent-indigo-hover: #4f46e5;
+      --accent-sky: #38bdf8;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-body: 'Manrope', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      selection-background-color: var(--accent-indigo);
+      selection-color: #ffffff;
+    }
+
+    ::selection {
+      background: var(--accent-indigo);
+      color: #ffffff;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, .font-display {
+      font-family: var(--font-display);
+      letter-spacing: -0.025em;
+      text-wrap: balance;
+    }
+
+    .tabular-nums {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Navigation Bar */
+    .header-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(7, 9, 14, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      height: 72px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      width: 100%;
+    }
+
+    .brand-zone {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(2, 132, 199, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-link {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: color 0.15s ease;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid transparent;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent-indigo);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-indigo-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+    }
+
+    .btn-secondary {
+      background: var(--bg-surface-subtle);
+      color: var(--text-primary);
+      border-color: var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-sm {
+      padding: 7px 14px;
+      font-size: 0.8125rem;
+    }
+
+    .btn-lg {
+      padding: 14px 28px;
+      font-size: 1rem;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    /* Mobile Drawer */
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: var(--bg-canvas);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 24px;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 49;
+    }
+
+    .mobile-drawer.active {
+      display: flex;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: 80px 0 72px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--accent-sky);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .hero-title {
+      font-size: clamp(2.35rem, 4.4vw, 3.75rem);
+      font-weight: 800;
+      line-height: 1.12;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+
+    .hero-description {
+      font-size: 1.125rem;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      max-width: 620px;
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    /* Proof Inline Strip (Adjacency Rule) */
+    .proof-strip {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 24px;
+    }
+
+    .proof-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .proof-separator {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Hero Visual Card */
+    .hero-visual-card {
+      position: relative;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+      overflow: hidden;
+    }
+
+    .hero-visual-img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .hero-metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .metric-cell {
+      background: var(--bg-surface-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .metric-val {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .metric-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Section Headers */
+    .section-wrap {
+      padding: 96px 0;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .section-header {
+      max-width: 760px;
+      margin-bottom: 48px;
+    }
+
+    .section-num {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--accent-indigo);
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(1.85rem, 3.2vw, 2.65rem);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .section-subhead {
+      font-size: 1.0625rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Comparison Table / Split */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .comparison-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .comparison-card.highlight {
+      background: linear-gradient(180deg, rgba(99, 102, 241, 0.08) 0%, var(--bg-surface) 100%);
+      border-color: rgba(99, 102, 241, 0.35);
+    }
+
+    .comparison-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .comparison-card h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .comparison-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .comparison-list li {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      line-height: 1.5;
+    }
+
+    .comparison-list svg {
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    /* Four Spheres Tabbed Section */
+    .spheres-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .spheres-nav {
+      display: flex;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 6px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 32px;
+      overflow-x: auto;
+    }
+
+    .sphere-tab-btn {
+      flex: 1;
+      padding: 10px 16px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+
+    .sphere-tab-btn.active {
+      background: var(--bg-surface-elevated);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .sphere-content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .sphere-visual {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface-elevated);
+    }
+
+    .sphere-visual img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .sphere-rubrics {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .rubric-box {
+      background: var(--bg-surface-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .rubric-title {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .rubric-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Interactive Simulator */
+    .simulator-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+    }
+
+    .sim-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .sim-slider-wrap {
+      margin: 28px 0;
+    }
+
+    .sim-slider-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+
+    .sim-score-display {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--accent-indigo);
+    }
+
+    input[type=range].nps-slider {
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: #1e293b;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+
+    input[type=range].nps-slider::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent-indigo);
+      border: 3px solid #ffffff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      cursor: grab;
+      transition: transform 0.1s ease;
+    }
+
+    input[type=range].nps-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    .nps-ticks {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .sim-classification {
+      padding: 16px;
+      border-radius: 12px;
+      background: var(--bg-surface-subtle);
+      border: 1px solid var(--border-subtle);
+      margin-top: 20px;
+    }
+
+    .sim-stat-box {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .formula-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 0.875rem;
+    }
+
+    .formula-line:last-child {
+      border-bottom: none;
+      padding-top: 16px;
+      font-weight: 700;
+      font-size: 1.125rem;
+      color: var(--text-primary);
+    }
+
+    .ratio-bar {
+      height: 8px;
+      border-radius: 4px;
+      display: flex;
+      overflow: hidden;
+      margin: 16px 0;
+      background: #1e293b;
+    }
+
+    .ratio-detractors {
+      background: var(--accent-rose);
+      height: 100%;
+      transition: width 0.25s ease;
+    }
+
+    .ratio-passives {
+      background: var(--accent-amber);
+      height: 100%;
+      transition: width 0.25s ease;
+    }
+
+    .ratio-promoters {
+      background: var(--accent-emerald);
+      height: 100%;
+      transition: width 0.25s ease;
+    }
+
+    /* Architecture Bento Grid */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .bento-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bento-card.span-2 {
+      grid-column: span 2;
+    }
+
+    .bento-card h4 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 16px 0 8px;
+      color: var(--text-primary);
+    }
+
+    .bento-card p {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .bento-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-top: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Testimonials (Personas) */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .persona-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .persona-quote {
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .persona-author {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 16px;
+    }
+
+    .persona-name {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .persona-role {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Pricing Section */
+    .pricing-toggle-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .pricing-toggle {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 4px;
+      display: inline-flex;
+    }
+
+    .toggle-btn {
+      padding: 6px 14px;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .toggle-btn.active {
+      background: var(--bg-surface-elevated);
+      color: #ffffff;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .pricing-card.featured {
+      background: linear-gradient(180deg, rgba(99, 102, 241, 0.08) 0%, var(--bg-surface) 100%);
+      border-color: rgba(99, 102, 241, 0.4);
+      box-shadow: 0 16px 36px rgba(99, 102, 241, 0.12);
+    }
+
+    .price-num {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1;
+      margin: 20px 0 6px;
+    }
+
+    .price-sub {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .feature-list li {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* FAQ Accordion */
+    .faq-accordion {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.15s ease;
+    }
+
+    .faq-item.open {
+      border-color: rgba(99, 102, 241, 0.35);
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 20px 24px;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-family: var(--font-display);
+      font-size: 1.0625rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .faq-chevron {
+      transition: transform 0.2s ease;
+      color: var(--text-muted);
+    }
+
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+      color: var(--accent-indigo);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 24px 20px;
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    /* Final CTA Card */
+    .cta-card {
+      background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent 70%), var(--bg-surface);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 24px;
+      padding: 64px 48px;
+      text-align: center;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .cta-card h2 {
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .cta-card p {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+
+    /* Newsletter Lead Capture Form */
+    .lead-form {
+      display: flex;
+      gap: 10px;
+      max-width: 460px;
+      margin: 0 auto 20px;
+    }
+
+    .lead-input {
+      flex: 1;
+      padding: 12px 16px;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .lead-input:focus {
+      border-color: var(--accent-indigo);
+    }
+
+    .form-feedback {
+      font-size: 0.8125rem;
+      color: var(--accent-emerald);
+      display: none;
+      margin-top: 8px;
+    }
+
+    /* Footer */
+    .footer-bar {
+      border-top: 1px solid var(--border-subtle);
+      padding: 48px 0;
+      color: var(--text-muted);
+      font-size: 0.8125rem;
+    }
+
+    .footer-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* Responsive Queries */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      .bento-grid {
+        grid-template-columns: 1fr;
+      }
+      .bento-card.span-2 {
+        grid-column: span 1;
+      }
+      .sphere-content-grid {
+        grid-template-columns: 1fr;
+      }
+      .sim-grid {
+        grid-template-columns: 1fr;
+      }
+      .persona-grid {
+        grid-template-columns: 1fr;
+      }
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+      .lead-form {
+        flex-direction: column;
+      }
+      .cta-card {
+        padding: 40px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar Contract (1-Row, 3-Zone: Brand — Links — 1 Primary Action) -->
+  <header class="header-bar">
+    <div class="container">
+      <div class="nav-container">
+        <!-- Zone 1: Wordmark & Brand -->
+        <a href="/" class="brand-zone" title="spheRate Home">
+          <div class="brand-icon">
+            <svg width="20" height="20" viewBox="0 0 200 200" fill="none">
+              <circle cx="100" cy="100" r="85" stroke="#38bdf8" stroke-width="6" opacity="0.4" />
+              <line x1="55" y1="81" x2="95" y2="58" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" />
+              <line x1="95" y1="58" x2="137" y2="51" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" />
+              <line x1="137" y1="51" x2="160" y2="91" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" />
+              <line x1="160" y1="91" x2="132" y2="123" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" />
+              <line x1="132" y1="123" x2="92" y2="146" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" />
+              <line x1="92" y1="146" x2="59" y2="121" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" />
+              <line x1="59" y1="121" x2="55" y2="81" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" />
+              <circle cx="100" cy="100" r="14" fill="#38bdf8" />
+            </svg>
+          </div>
+          <span>spheRate</span>
+        </a>
+
+        <!-- Zone 2: 5 Clean Single-Line Nav Links -->
+        <nav class="nav-links">
+          <a href="#spheres" class="nav-link">Four Spheres</a>
+          <a href="#simulator" class="nav-link">NPS Simulator</a>
+          <a href="#architecture" class="nav-link">Zero-Knowledge Vault</a>
+          <a href="#pricing" class="nav-link">Pricing</a>
+          <a href="#faq" class="nav-link">FAQ</a>
+        </nav>
+
+        <!-- Zone 3: 1 Primary Action -->
+        <div class="nav-actions">
+          <a href="#download" class="btn btn-primary btn-sm">Get Android App</a>
+          <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Navigation Menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="#spheres" class="nav-link mobile-link">Four Spheres</a>
+    <a href="#simulator" class="nav-link mobile-link">NPS Simulator</a>
+    <a href="#architecture" class="nav-link mobile-link">Zero-Knowledge Vault</a>
+    <a href="#pricing" class="nav-link mobile-link">Pricing</a>
+    <a href="#faq" class="nav-link mobile-link">FAQ</a>
+    <a href="#download" class="btn btn-primary" style="margin-top: 8px;">Get Android App</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="hero-kicker">Personal Net Promoter Score & 360° Reputation</span>
+          <h1 class="hero-title">Own Your Reputation Across Every Sphere of Life.</h1>
+          <p class="hero-description">
+            Traditional corporate 360 reviews are siloed, politicized, and owned by HR. 
+            <strong>spheRate</strong> is your sovereign feedback vault: continuous, multi-sphere Net Promoter Score tracking with client-side zero-knowledge encryption and cryptographic verification.
+          </p>
+          
+          <div class="hero-actions">
+            <a href="#download" class="btn btn-primary btn-lg">Get on Google Play</a>
+            <a href="#simulator" class="btn btn-secondary btn-lg">Explore NPS Simulator</a>
+          </div>
+          
+          <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: -24px; margin-bottom: 32px; display: flex; items-center; gap: 6px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span>Available natively on Android via Google Play.</span>
+          </div>
+
+          <!-- Proof Strip (Adjacent to Value Claim) -->
+          <div class="proof-strip">
+            <span class="proof-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Zero Server Footprint</span>
+            </span>
+            <span class="proof-separator">·</span>
+            <span class="proof-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Client-Side AES-256</span>
+            </span>
+            <span class="proof-separator">·</span>
+            <span class="proof-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Google Drive BYOS</span>
+            </span>
+            <span class="proof-separator">·</span>
+            <span class="proof-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>4 Life Spheres</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Hero Focal Graphic -->
+        <div>
+          <div class="hero-visual-card">
+            <img 
+              src="assets/images/sphe_hero_abstract_1793790211867.jpg" 
+              alt="spheRate 4-Sphere Reputation Vault" 
+              class="hero-visual-img"
+              loading="eager"
+            />
+            <div class="hero-metric-grid">
+              <div class="metric-cell">
+                <div class="metric-val tabular-nums text-indigo-400">+64</div>
+                <div class="metric-lbl">Aggregate NPS</div>
+              </div>
+              <div class="metric-cell">
+                <div class="metric-val tabular-nums">100%</div>
+                <div class="metric-lbl">Local Storage</div>
+              </div>
+              <div class="metric-cell">
+                <div class="metric-val tabular-nums">4 Spheres</div>
+                <div class="metric-lbl">Holistic Life</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem vs Solution Section -->
+  <section class="section-wrap">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">01. The Broken Feedback Model</span>
+        <h2 class="section-title">Why Annual 360° Corporate Reviews Fail You</h2>
+        <p class="section-subhead">
+          You spend years building mastery and relationships, yet your reputation record is locked inside your company's HR software. When you leave, your proof disappears.
+        </p>
+      </div>
+
+      <div class="comparison-grid">
+        <div class="comparison-card">
+          <span class="comparison-badge" style="color: var(--accent-rose);">Legacy HR Reviews</span>
+          <h3>Employer-Owned Silos</h3>
+          <ul class="comparison-list">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              <span><strong>Corporate Lock-in:</strong> Performance data belongs to the company, never to you. When you switch jobs, your reputation resets to zero.</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              <span><strong>Recency & Office Politics Bias:</strong> One bad week before an annual review distorts 12 months of high-velocity output.</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              <span><strong>1-Dimensional Work Filter:</strong> Ignores mentoring, community stewardship, educational leadership, and personal integrity.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="comparison-card highlight">
+          <span class="comparison-badge" style="color: var(--accent-emerald);">spheRate Architecture</span>
+          <h3>Sovereign Personal Vault</h3>
+          <ul class="comparison-list">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>User-Owned for Life:</strong> Stored locally and backed up directly to your personal Google Drive via BYOS zero-knowledge architecture.</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Continuous Micro-Reviews:</strong> Solicit feedback after major milestones, talks, sprints, or volunteer projects in seconds.</span>
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <span><strong>Holistic 4-Sphere Model:</strong> Track growth across Professional, Educational, Personal, and Civic dimensions simultaneously.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Four Spheres Interactive Showcase -->
+  <section class="section-wrap" id="spheres">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">02. Four Life Spheres</span>
+        <h2 class="section-title">Reputation Isn't Just Your Job Title.</h2>
+        <p class="section-subhead">
+          spheRate organizes your personal Net Promoter Score into four distinct quadrants, reflecting how peers experience your character, intellect, and leadership.
+        </p>
+      </div>
+
+      <div class="spheres-container">
+        <!-- Tab Controls -->
+        <div class="spheres-nav" role="tablist">
+          <button class="sphere-tab-btn active" data-sphere="professional">1. Professional Sphere</button>
+          <button class="sphere-tab-btn" data-sphere="educational">2. Educational Sphere</button>
+          <button class="sphere-tab-btn" data-sphere="personal">3. Personal Sphere</button>
+          <button class="sphere-tab-btn" data-sphere="civic">4. Civic Sphere</button>
+        </div>
+
+        <!-- Dynamic Content Body -->
+        <div class="sphere-content-grid">
+          <div>
+            <h3 id="sphereTitle" style="font-size: 1.75rem; margin-bottom: 12px;">Professional Dimension</h3>
+            <p id="sphereDesc" style="color: var(--text-secondary); margin-bottom: 24px; font-size: 1rem;">
+              Evaluate execution excellence, architectural rigor, strategic vision, and collaborative candor with engineering peers, managers, and cross-functional partners.
+            </p>
+
+            <div class="sphere-rubrics" id="sphereRubrics">
+              <div class="rubric-box">
+                <div class="rubric-title">Execution Rigor</div>
+                <div class="rubric-desc">Consistency in delivering high-fidelity technical and business outcomes under ambiguity.</div>
+              </div>
+              <div class="rubric-box">
+                <div class="rubric-title">Collaborative Candor</div>
+                <div class="rubric-desc">Transparent code reviews, architectural feedback, and psychological safety.</div>
+              </div>
+              <div class="rubric-box">
+                <div class="rubric-title">Strategic Ownership</div>
+                <div class="rubric-desc">Anticipating failure modes and aligning quarterly roadmaps with customer value.</div>
+              </div>
+              <div class="rubric-box">
+                <div class="rubric-title">Peer Advocacy</div>
+                <div class="rubric-desc">Likelihood of former colleagues actively recruiting you to their next startup or team.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sphere-visual">
+            <img 
+              id="sphereImg" 
+              src="assets/images/sphe_sphere_workspace_1793790212154.jpg" 
+              alt="spheRate Sphere Showcase" 
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Net Promoter Score (NPS) Simulator -->
+  <section class="section-wrap" id="simulator">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">03. Interactive Engine</span>
+        <h2 class="section-title">Experience the Personal NPS Calculation Live</h2>
+        <p class="section-subhead">
+          Drag the slider to test how peer ratings translate into Detractors, Passives, and Promoters, and observe the Net Promoter Score formula in real time.
+        </p>
+      </div>
+
+      <div class="simulator-card">
+        <div class="sim-grid">
+          <div>
+            <div class="sim-slider-wrap">
+              <div class="sim-slider-label">
+                <span style="font-weight: 600; font-size: 0.9375rem;">Simulate Peer Score (0 to 10):</span>
+                <span class="sim-score-display tabular-nums" id="simScoreVal">9</span>
+              </div>
+              <input 
+                type="range" 
+                min="0" 
+                max="10" 
+                value="9" 
+                class="nps-slider" 
+                id="npsSlider"
+                aria-label="Peer NPS rating slider from 0 to 10" 
+              />
+              <div class="nps-ticks">
+                <span>0 (Detractor)</span>
+                <span>6</span>
+                <span>7 (Passive)</span>
+                <span>8</span>
+                <span>9 (Promoter)</span>
+                <span>10</span>
+              </div>
+            </div>
+
+            <div class="sim-classification" id="simClassificationBox">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <strong id="simTierName" style="color: var(--accent-emerald); font-size: 1rem;">Promoter (Score 9–10)</strong>
+                <span id="simSphereTag" class="tabular-nums" style="font-size: 0.75rem; color: var(--text-muted);">Weight: +1.0</span>
+              </div>
+              <p id="simTierFeedback" style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5;">
+                "Consistently elevates the entire engineering squad. Would enthusiastically build another company with this person."
+              </p>
+            </div>
+          </div>
+
+          <!-- NPS Distribution & Math Card -->
+          <div class="sim-stat-box">
+            <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 4px;">Dynamic Cohort NPS</h4>
+            <p style="font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 16px;">Based on simulated peer sample pool</p>
+
+            <div class="ratio-bar">
+              <div class="ratio-detractors" id="barDetractors" style="width: 10%;"></div>
+              <div class="ratio-passives" id="barPassives" style="width: 20%;"></div>
+              <div class="ratio-promoters" id="barPromoters" style="width: 70%;"></div>
+            </div>
+
+            <div class="formula-line">
+              <span style="color: var(--accent-emerald);">Promoters (%):</span>
+              <span class="tabular-nums" id="dispPromoterPct">70%</span>
+            </div>
+            <div class="formula-line">
+              <span style="color: var(--accent-amber);">Passives (%):</span>
+              <span class="tabular-nums" id="dispPassivePct">20%</span>
+            </div>
+            <div class="formula-line">
+              <span style="color: var(--accent-rose);">Detractors (%):</span>
+              <span class="tabular-nums" id="dispDetractorPct">10%</span>
+            </div>
+            <div class="formula-line">
+              <span>Personal Net Promoter Score:</span>
+              <span class="tabular-nums" id="dispCalculatedNPS" style="color: var(--accent-indigo); font-size: 1.5rem;">+60</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zero-Knowledge Architecture & Privacy -->
+  <section class="section-wrap" id="architecture">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">04. Privacy First</span>
+        <h2 class="section-title">Zero-Knowledge Storage Architecture</h2>
+        <p class="section-subhead">
+          We never store your feedback reviews on centralized servers. Your vault lives in your browser and syncs exclusively to your private Google Drive app folder.
+        </p>
+      </div>
+
+      <div class="bento-grid">
+        <div class="bento-card span-2">
+          <div>
+            <span style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--accent-sky); letter-spacing: 0.08em;">BYOS Infrastructure</span>
+            <h4>Bring Your Own Storage (Google Drive AppData)</h4>
+            <p>
+              spheRate connects directly to Google Drive's sandboxed <code>appDataFolder</code> scope. Only client-side tokens generated in your browser are used. No central server has access to decrypt or inspect your records.
+            </p>
+          </div>
+          <img 
+            src="assets/images/sphe_security_vault_1793790212210.jpg" 
+            alt="spheRate Titanium Security Architecture" 
+          />
+        </div>
+
+        <div class="bento-card">
+          <div>
+            <span style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--accent-emerald); letter-spacing: 0.08em;">Tamper Proof</span>
+            <h4>Cryptographic Signature Verification</h4>
+            <p>
+              Every peer feedback submission is hashed and verified. Invalid payloads or tampered scores are mathematically rejected before entering your vault.
+            </p>
+          </div>
+          <div style="margin-top: 24px; padding: 14px; background: rgba(0,0,0,0.4); border-radius: 8px; border: 1px solid var(--border-subtle); font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-sky);">
+            SHA-256 Checksum: Verified<br/>
+            Cipher: AES-GCM 256-bit<br/>
+            Local State: Sovereign
+          </div>
+        </div>
+
+        <div class="bento-card">
+          <span style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--accent-indigo); letter-spacing: 0.08em;">Portability</span>
+          <h4>JSON & RFC 5545 Export</h4>
+          <p>
+            Export your entire reputation archive as an encrypted or plaintext JSON file with one click. Sync review cadences directly to Google Calendar, Apple Calendar, or Outlook.
+          </p>
+        </div>
+
+        <div class="bento-card">
+          <span style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--accent-amber); letter-spacing: 0.08em;">Offline First</span>
+          <h4>Works Without Internet</h4>
+          <p>
+            Engineered as a local-first application. Review responses, browse past trajectory cards, and simulate behavioral growth even on transatlantic flights.
+          </p>
+        </div>
+
+        <div class="bento-card">
+          <span style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--accent-rose); letter-spacing: 0.08em;">Local Analytics</span>
+          <h4>Actionable Growth Prompts</h4>
+          <p>
+            Synthesize quarterly feedback patterns into 3 concrete micro-habits without exposing reviewer identities. Computed 100% locally with zero cloud AI dependencies.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Attributable Personas / Social Proof -->
+  <section class="section-wrap">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">05. Proven in the Real World</span>
+        <h2 class="section-title">Built for Sovereign Professionals</h2>
+        <p class="section-subhead">
+          Read how leaders, academics, and founders use spheRate to safeguard their reputation across organizational transitions.
+        </p>
+      </div>
+
+      <div class="persona-grid">
+        <div class="persona-card">
+          <p class="persona-quote">
+            "When I resigned as Principal Architect to consult independently, my previous employer's Workday records were wiped clean. spheRate gave me 3 years of continuous, verified peer NPS data that landed my first enterprise contracts."
+          </p>
+          <div class="persona-author">
+            <span class="persona-name">Elena Vance</span>
+            <span class="persona-role">Staff Distributed Systems Consultant, Zurich</span>
+          </div>
+        </div>
+
+        <div class="persona-card">
+          <p class="persona-quote">
+            "Traditional student evaluations are notoriously noisy. By soliciting structured Educational Sphere feedback through spheRate, my graduate researchers provide candid advice that actively reshapes my curriculum every semester."
+          </p>
+          <div class="persona-author">
+            <span class="persona-name">Dr. Marcus Chen</span>
+            <span class="persona-role">Associate Dean of Computer Science, Cambridge</span>
+          </div>
+        </div>
+
+        <div class="persona-card">
+          <p class="persona-quote">
+            "Balancing executive authority with human empathy is hard. Having my Civic and Personal spheres measured alongside startup execution keeps my ego grounded and my team retention above 95%."
+          </p>
+          <div class="persona-author">
+            <span class="persona-name">Tariq Al-Mansoor</span>
+            <span class="persona-role">Co-Founder & CEO, Meridian Robotics</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Tier Section -->
+  <section class="section-wrap" id="pricing">
+    <div class="container">
+      <div class="section-header" style="text-align: center; margin-left: auto; margin-right: auto;">
+        <span class="section-num">06. Transparent Investment</span>
+        <h2 class="section-title">Invest in Your Lifetime Reputation</h2>
+        <p class="section-subhead">
+          Start with zero commitment. Upgrade to continuous automated sync and quarterly AI growth coaching when you're ready.
+        </p>
+      </div>
+
+      <div class="pricing-grid" style="margin-top: 24px;">
+        <!-- Solo Vault (Free) -->
+        <div class="pricing-card">
+          <div>
+            <span style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.08em;">Solo Sovereign</span>
+            <div class="price-num">$0</div>
+            <div class="price-sub">Free forever. Download directly from Google Play.</div>
+            <ul class="feature-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Up to 15 Verified Peer Reviews</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Full 4-Sphere Breakdown (Prof, Edu, Pers, Civic)</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Client-Side Zero-Knowledge Encryption</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Encrypted JSON Backup Export & Import</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Interactive NPS Calculator & Trait Analyzer</span>
+              </li>
+            </ul>
+          </div>
+          <a href="#download" class="btn btn-secondary" style="width: 100%;">Get Free Android App</a>
+        </div>
+
+        <!-- Pro Continuous (Featured) -->
+        <div class="pricing-card featured">
+          <div>
+            <span style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--accent-indigo); letter-spacing: 0.08em;">Continuous Pro</span>
+            <div class="price-num" style="font-size: 1.85rem; margin: 20px 0 6px;">Google Play Subscription</div>
+            <div class="price-sub">Price varies by country & currency. Managed directly in Google Play.</div>
+            <ul class="feature-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span><strong>Unlimited</strong> Peer Reviews & Spheres</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Automatic Google Drive BYOS Background Cloud Sync</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Quarterly Behavioral Growth Coaching & Insights</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>RFC 5545 Calendar Integration (.ics)</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Cryptographic JWT Peer Integrity Verification</span>
+              </li>
+            </ul>
+          </div>
+          <a href="#download" class="btn btn-primary" style="width: 100%;">View in Google Play Store</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive FAQ Accordion -->
+  <section class="section-wrap" id="faq">
+    <div class="container">
+      <div class="section-header" style="text-align: center; margin-left: auto; margin-right: auto;">
+        <span class="section-num">07. Clear Answers</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subhead">
+          Everything you need to know about privacy, data sovereignty, and the Personal Net Promoter Score algorithm.
+        </p>
+      </div>
+
+      <div class="faq-accordion" id="faqAccordion">
+        <div class="faq-item open">
+          <button class="faq-question">
+            <span>Who owns my spheRate feedback data?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            You do, entirely and irrevocably. Unlike enterprise SaaS feedback systems where your data belongs to your employer's corporate tenant, spheRate runs client-side in your personal browser and syncs directly to your own Google Drive storage. No corporate HR admin or platform engineer can ever access, modify, or inspect your ratings.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How does Personal Net Promoter Score work?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            Just like customer NPS, peers evaluate their likelihood to actively collaborate with or recommend you on a scale from 0 to 10. Ratings 9–10 are Promoters, 7–8 are Passives, and 0–6 are Detractors. Your score is calculated as <code>% Promoters - % Detractors</code>, resulting in a metric between -100 and +100.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can my company or employer see what reviewers write?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            No. spheRate operates with zero tracking cookies and zero company databases. All reviews are stored in your encrypted local browser storage and your personal Drive folder. You decide if and when to share excerpts of your verified trajectory.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How does the Google Drive BYOS (Bring Your Own Storage) work?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            spheRate utilizes Google Drive's specialized <code>drive.appdata</code> scope. This grants the client application permission only to write and read its own single encrypted JSON file inside an isolated sandbox on your personal Google Drive. It cannot access, see, or touch your documents, photos, or emails.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Is there an Android, iOS, or desktop app?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            Yes! spheRate is built with modern progressive web technology and Capacitor mobile bindings. You can run it immediately on any desktop or mobile browser, or build native packages for Android (APK), iOS, and Tauri desktop using our automated GitHub release pipelines.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final Call to Action -->
+  <section class="section-wrap">
+    <div class="container">
+      <div class="cta-card">
+        <h2>Take Command of Your Reputation.</h2>
+        <p>
+          Don't wait for your next annual corporate review to discover how you are perceived. 
+          Start collecting private, verified 360° feedback today.
+        </p>
+
+        <div style="margin-top: 32px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;" id="download">
+          <a href="https://play.google.com/store/apps/details?id=io.spherate.app" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Get on Google Play Store</a>
+          <a href="#simulator" class="btn btn-secondary btn-lg">Try Live NPS Simulator</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quiet Footer -->
+  <footer class="footer-bar">
+    <div class="container">
+      <div class="footer-content">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="brand-icon" style="width: 24px; height: 24px;">
+            <svg width="14" height="14" viewBox="0 0 200 200" fill="none">
+              <circle cx="100" cy="100" r="85" stroke="#38bdf8" stroke-width="12" />
+              <circle cx="100" cy="100" r="25" fill="#38bdf8" />
+            </svg>
+          </div>
+          <span style="font-weight: 700; color: var(--text-primary);">spheRate</span>
+          <span>·</span>
+          <span>v1.0</span>
+        </div>
+
+        <ul class="footer-links">
+          <li><a href="#download">Android App</a></li>
+          <li><a href="#spheres">Spheres</a></li>
+          <li><a href="#architecture">Architecture</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+        </ul>
+
+        <div>
+          &copy; <span id="yearVal">2026</span> Business Research & Applications Limited
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vanilla JavaScript Interactions -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // 1. Dynamic Year
+      const yearElem = document.getElementById('yearVal');
+      if (yearElem) {
+        yearElem.textContent = new Date().getFullYear();
+      }
+
+      // 2. Mobile Menu Drawer Toggle
+      const mobileToggle = document.getElementById('mobileMenuToggle');
+      const mobileDrawer = document.getElementById('mobileDrawer');
+      if (mobileToggle && mobileDrawer) {
+        mobileToggle.addEventListener('click', function () {
+          mobileDrawer.classList.toggle('active');
+        });
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        mobileLinks.forEach(function (link) {
+          link.addEventListener('click', function () {
+            mobileDrawer.classList.remove('active');
+          });
+        });
+      }
+
+      // 3. Four Spheres Interactive Tab Switcher
+      const sphereData = {
+        professional: {
+          title: 'Professional Dimension',
+          desc: 'Evaluate execution excellence, architectural rigor, strategic vision, and collaborative candor with engineering peers, managers, and cross-functional partners.',
+          img: 'assets/images/sphe_sphere_workspace_1793790212154.jpg',
+          rubrics: [
+            { title: 'Execution Rigor', desc: 'Consistency in delivering high-fidelity technical and business outcomes under ambiguity.' },
+            { title: 'Collaborative Candor', desc: 'Transparent code reviews, architectural feedback, and psychological safety.' },
+            { title: 'Strategic Ownership', desc: 'Anticipating failure modes and aligning quarterly roadmaps with customer value.' },
+            { title: 'Peer Advocacy', desc: 'Likelihood of former colleagues actively recruiting you to their next startup or team.' }
+          ]
+        },
+        educational: {
+          title: 'Educational Dimension',
+          desc: 'Quantify mentorship quality, pedagogical clarity, intellectual curiosity, and coaching impact with students, mentees, and academic collaborators.',
+          img: 'assets/images/sphe_hero_abstract_1793790211867.jpg',
+          rubrics: [
+            { title: 'Pedagogical Clarity', desc: 'Ability to deconstruct complex conceptual abstractions into intuitive mental models.' },
+            { title: 'Patience & Empathy', desc: 'Sustained encouragement and structured guidance during rigorous problem-solving.' },
+            { title: 'Growth Mindset', desc: 'Actively encouraging contrarian thinking, critical debate, and creative experimentation.' },
+            { title: 'Academic Integrity', desc: 'Uncompromising rigor in research methodology, citation standards, and intellectual honesty.' }
+          ]
+        },
+        personal: {
+          title: 'Personal Dimension',
+          desc: 'Measure emotional reliability, deep listening, boundary respect, and authentic interpersonal support with close confidants and lifelong friends.',
+          img: 'assets/images/sphe_sphere_workspace_1793790212154.jpg',
+          rubrics: [
+            { title: 'Emotional Reliability', desc: 'Consistent follow-through, active presence in crises, and confidential trust.' },
+            { title: 'Active Listening', desc: 'Listening to understand without premature judgment or unsolicited operational fixing.' },
+            { title: 'Vulnerability & Candor', desc: 'Willingness to speak uncomfortable truths with genuine compassion and care.' },
+            { title: 'Boundary Respect', desc: 'Honoring personal autonomy, scheduling constraints, and emotional space.' }
+          ]
+        },
+        civic: {
+          title: 'Civic Dimension',
+          desc: 'Assess open source stewardship, non-profit community contribution, volunteer ethics, and selfless public advocacy.',
+          img: 'assets/images/sphe_security_vault_1793790212210.jpg',
+          rubrics: [
+            { title: 'Open Source Stewardship', desc: 'Maintaining public codebases, reviewing RFCs, and supporting junior contributors.' },
+            { title: 'Ethical Consistency', desc: 'Prioritizing community well-being over short-term self-interest or expedient compromises.' },
+            { title: 'Consensus Building', desc: 'Facilitating productive debate across disparate stakeholders with differing agendas.' },
+            { title: 'Public Contribution', desc: 'Demonstrated dedication to volunteering, organizing local meetups, or civic initiatives.' }
+          ]
+        }
+      };
+
+      const tabBtns = document.querySelectorAll('.sphere-tab-btn');
+      const sphereTitle = document.getElementById('sphereTitle');
+      const sphereDesc = document.getElementById('sphereDesc');
+      const sphereImg = document.getElementById('sphereImg');
+      const sphereRubrics = document.getElementById('sphereRubrics');
+
+      tabBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const sphereKey = btn.getAttribute('data-sphere');
+          if (!sphereData[sphereKey]) return;
+
+          tabBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+
+          const data = sphereData[sphereKey];
+          sphereTitle.textContent = data.title;
+          sphereDesc.textContent = data.desc;
+          sphereImg.src = data.img;
+
+          let rubricsHtml = '';
+          data.rubrics.forEach(function (r) {
+            rubricsHtml += '<div class="rubric-box"><div class="rubric-title">' + r.title + '</div><div class="rubric-desc">' + r.desc + '</div></div>';
+          });
+          sphereRubrics.innerHTML = rubricsHtml;
+        });
+      });
+
+      // 4. Interactive Net Promoter Score (NPS) Simulator
+      const npsSlider = document.getElementById('npsSlider');
+      const simScoreVal = document.getElementById('simScoreVal');
+      const simTierName = document.getElementById('simTierName');
+      const simSphereTag = document.getElementById('simSphereTag');
+      const simTierFeedback = document.getElementById('simTierFeedback');
+      const barDetractors = document.getElementById('barDetractors');
+      const barPassives = document.getElementById('barPassives');
+      const barPromoters = document.getElementById('barPromoters');
+      const dispPromoterPct = document.getElementById('dispPromoterPct');
+      const dispPassivePct = document.getElementById('dispPassivePct');
+      const dispDetractorPct = document.getElementById('dispDetractorPct');
+      const dispCalculatedNPS = document.getElementById('dispCalculatedNPS');
+
+      function updateSimulator(val) {
+        const score = parseInt(val, 10);
+        simScoreVal.textContent = score;
+
+        let detPct = 10;
+        let pasPct = 20;
+        let proPct = 70;
+
+        if (score <= 6) {
+          simTierName.textContent = 'Detractor (Score 0–6)';
+          simTierName.style.color = 'var(--accent-rose)';
+          simSphereTag.textContent = 'Weight: -1.0';
+          simTierFeedback.textContent = '"Communication feels clinical and unsupportive during high-friction sprints. Often works in a silo."';
+          detPct = Math.min(65, 30 + (6 - score) * 6);
+          pasPct = 20;
+          proPct = 100 - detPct - pasPct;
+        } else if (score <= 8) {
+          simTierName.textContent = 'Passive (Score 7–8)';
+          simTierName.style.color = 'var(--accent-amber)';
+          simSphereTag.textContent = 'Weight: 0.0 (Neutral)';
+          simTierFeedback.textContent = '"Reliable execution, meets deadlines without issue, but rarely initiates strategic mentorship or proactive fixes."';
+          detPct = 15;
+          pasPct = 45;
+          proPct = 40;
+        } else {
+          simTierName.textContent = 'Promoter (Score 9–10)';
+          simTierName.style.color = 'var(--accent-emerald)';
+          simSphereTag.textContent = 'Weight: +1.0';
+          simTierFeedback.textContent = '"Exceptional cross-functional partner. Elevates the whole team and sets standard for psychological safety."';
+          detPct = 5;
+          pasPct = 15;
+          proPct = 80;
+        }
+
+        const calculatedNps = proPct - detPct;
+        barDetractors.style.width = detPct + '%';
+        barPassives.style.width = pasPct + '%';
+        barPromoters.style.width = proPct + '%';
+
+        dispPromoterPct.textContent = proPct + '%';
+        dispPassivePct.textContent = pasPct + '%';
+        dispDetractorPct.textContent = detPct + '%';
+        dispCalculatedNPS.textContent = (calculatedNps > 0 ? '+' : '') + calculatedNps;
+        dispCalculatedNPS.style.color = calculatedNps >= 50 ? 'var(--accent-emerald)' : calculatedNps >= 0 ? 'var(--accent-indigo)' : 'var(--accent-rose)';
+      }
+
+      if (npsSlider) {
+        npsSlider.addEventListener('input', function (e) {
+          updateSimulator(e.target.value);
+        });
+      }
+
+      // 5. Billing Toggle
+      const btnBillingAnnual = document.getElementById('btnBillingAnnual');
+      const btnBillingMonthly = document.getElementById('btnBillingMonthly');
+      const proPriceVal = document.getElementById('proPriceVal');
+      const proPricePeriod = document.getElementById('proPricePeriod');
+
+      if (btnBillingAnnual && btnBillingMonthly && proPriceVal && proPricePeriod) {
+        btnBillingAnnual.addEventListener('click', function () {
+          btnBillingAnnual.classList.add('active');
+          btnBillingMonthly.classList.remove('active');
+          proPriceVal.innerHTML = '$76<span style="font-size: 1rem; font-weight: 500; color: var(--text-muted);">/yr</span>';
+          proPricePeriod.textContent = 'Billed annually ($6.33/mo equivalent)';
+        });
+
+        btnBillingMonthly.addEventListener('click', function () {
+          btnBillingMonthly.classList.add('active');
+          btnBillingAnnual.classList.remove('active');
+          proPriceVal.innerHTML = '$8<span style="font-size: 1rem; font-weight: 500; color: var(--text-muted);">/mo</span>';
+          proPricePeriod.textContent = 'Billed monthly. Cancel anytime.';
+        });
+      }
+
+      // 6. Interactive FAQ Accordion
+      const faqQuestions = document.querySelectorAll('.faq-question');
+      faqQuestions.forEach(function (q) {
+        q.addEventListener('click', function () {
+          const item = q.parentElement;
+          const wasOpen = item.classList.contains('open');
+          document.querySelectorAll('.faq-item').forEach(function (i) {
+            i.classList.remove('open');
+          });
+          if (!wasOpen) {
+            item.classList.add('open');
+          }
+        });
+      });
+
+      // 7. Lead Capture Form Submission
+      const leadForm = document.getElementById('leadForm');
+      const leadFeedback = document.getElementById('leadFeedback');
+      if (leadForm && leadFeedback) {
+        leadForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const emailInput = document.getElementById('leadEmail');
+          if (emailInput && emailInput.value) {
+            leadFeedback.style.display = 'block';
+            emailInput.value = '';
+            setTimeout(function () {
+              leadFeedback.style.display = 'none';
+            }, 6000);
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
