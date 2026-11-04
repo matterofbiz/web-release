@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — spheRate Sovereign Feedback Vault</title>
+  <meta name="description" content="Privacy Policy for spheRate. Learn about our client-side zero-knowledge architecture, Bring Your Own Storage (BYOS) Google Drive integration, and data sovereignty commitments." />
+  <meta property="og:title" content="Privacy Policy — spheRate" />
+  <meta property="og:description" content="spheRate Privacy Policy: Zero-knowledge client-side encryption, local storage sovereignty, and transparent API usage." />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+
+  <!-- Google Fonts: Plus Jakarta Sans & Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-canvas: #07090e;
+      --bg-surface: #0e131f;
+      --bg-surface-elevated: #141c2e;
+      --bg-surface-subtle: rgba(255, 255, 255, 0.03);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-indigo: #6366f1;
+      --accent-sky: #38bdf8;
+      --accent-emerald: #10b981;
+      --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-body: 'Manrope', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--accent-sky);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    a:hover {
+      color: var(--accent-indigo);
+      text-decoration: underline;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    /* Header Bar */
+    .header-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(7, 9, 14, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      height: 72px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .brand-zone {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(2, 132, 199, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent-indigo);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-primary:hover {
+      background: #4f46e5;
+      text-decoration: none;
+    }
+
+    .btn-secondary {
+      background: var(--bg-surface-subtle);
+      color: var(--text-secondary);
+      border-color: var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.08);
+      text-decoration: none;
+    }
+
+    /* Policy Content Layout */
+    .policy-wrapper {
+      padding: 64px 0 96px;
+    }
+
+    .policy-header {
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 32px;
+      margin-bottom: 48px;
+    }
+
+    .policy-tag {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--accent-emerald);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .effective-date {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* Policy Sections */
+    .policy-section {
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2 .section-idx {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      color: var(--accent-indigo);
+    }
+
+    p {
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+
+    ul {
+      list-style: none;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    li {
+      color: var(--text-secondary);
+      position: relative;
+      padding-left: 24px;
+    }
+
+    li::before {
+      content: "•";
+      color: var(--accent-indigo);
+      font-weight: bold;
+      font-size: 1.25rem;
+      position: absolute;
+      left: 6px;
+      top: -2px;
+    }
+
+    .callout-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .callout-box.highlight {
+      border-color: rgba(99, 102, 241, 0.4);
+      background: linear-gradient(180deg, rgba(99, 102, 241, 0.08) 0%, var(--bg-surface) 100%);
+    }
+
+    .callout-title {
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 1.0625rem;
+      margin-bottom: 8px;
+    }
+
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--accent-sky);
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Footer */
+    .footer-bar {
+      border-top: 1px solid var(--border-subtle);
+      padding: 40px 0;
+      color: var(--text-muted);
+      font-size: 0.8125rem;
+    }
+
+    .footer-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Bar -->
+  <header class="header-bar">
+    <div class="container">
+      <div class="nav-container">
+        <a href="/landing.html" class="brand-zone" title="spheRate Landing">
+          <div class="brand-icon">
+            <svg width="20" height="20" viewBox="0 0 200 200" fill="none">
+              <circle cx="100" cy="100" r="85" stroke="#38bdf8" stroke-width="6" opacity="0.4" />
+              <circle cx="100" cy="100" r="14" fill="#38bdf8" />
+            </svg>
+          </div>
+          <span>spheRate</span>
+        </a>
+
+        <div class="nav-actions">
+          <a href="/landing.html" class="btn btn-secondary">← Back to Overview</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="policy-wrapper">
+    <div class="container">
+      
+      <div class="policy-header">
+        <span class="policy-tag">Data Sovereignty & Privacy Architecture</span>
+        <h1>Privacy Policy</h1>
+        <div class="effective-date">Effective Date: March 31, 2026 · Version 1.0</div>
+      </div>
+
+      <!-- Core Principle Callout -->
+      <div class="callout-box highlight">
+        <div class="callout-title">The spheRate Sovereignty Pledge</div>
+        <p style="margin-bottom: 0;">
+          <strong>spheRate</strong> is built from the ground up as a zero-knowledge, client-side personal feedback vault. We believe your reputation, ratings, and peer feedback belong exclusively to you—not to corporate HR silos, advertising tracking networks, or central servers.
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2><span class="section-idx">01.</span> Scope and Fundamental Principles</h2>
+        <p>
+          This Privacy Policy governs the spheRate web application, mobile bindings, and associated services. By using spheRate, you benefit from a local-first software architecture designed to operate without central tracking, user profiling, or secondary data sales.
+        </p>
+        <ul>
+          <li><strong>Zero Tracking Cookies:</strong> We do not deploy behavioral tracking cookies, Facebook Pixels, Google Analytics scripts, or third-party advertising SDKs.</li>
+          <li><strong>No HR Centralization:</strong> Your data is never shared with or exposed to your employer, school, or external organizations unless you explicitly export or present your record.</li>
+          <li><strong>Data Minimization:</strong> We only process data required to compute your Net Promoter Score and render your local feedback dashboard.</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h2><span class="section-idx">02.</span> Information Storage and Local Sovereignty</h2>
+        <p>
+          Unlike legacy cloud software, spheRate stores your primary application data—including 360-degree reviews, behavioral ratings, sphere tags, and goal progress—directly inside your client browser storage (IndexedDB / LocalStorage).
+        </p>
+        <div class="callout-box">
+          <div class="callout-title">How Storage Works</div>
+          <ul>
+            <li><strong>Local Browser Storage:</strong> Reviews and ratings remain on your physical device until cleared or overwritten by you.</li>
+            <li><strong>Google Drive BYOS (Bring Your Own Storage):</strong> When you enable cloud backup, spheRate authenticates using OAuth 2.0 strictly requesting the isolated <code>https://www.googleapis.com/auth/drive.appdata</code> scope.</li>
+            <li><strong>Isolated App Sandbox:</strong> This scope restricts spheRate to a single hidden data file inside your personal Google Drive account. spheRate cannot read, scan, or access any other documents or files in your Google Drive.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="policy-section">
+        <h2><span class="section-idx">03.</span> No Artificial Intelligence (AI) Model Processing</h2>
+        <p>
+          <strong>spheRate does NOT use Artificial Intelligence (AI), Large Language Models (LLMs), or third-party Machine Learning services</strong> (such as Google Gemini, OpenAI, or Anthropic) to process, analyze, or train on your feedback data.
+        </p>
+        <ul>
+          <li><strong>100% Deterministic Local Computing:</strong> All calculations—including Personal Net Promoter Score aggregation, 4-Sphere score distribution, behavioral trait breakdown, and growth prompts—are performed entirely on your client device using local, deterministic heuristic algorithms.</li>
+          <li><strong>Zero Model Training:</strong> Your review entries, ratings, comments, and personal information are never transmitted to any AI provider or used for model training or machine intelligence datasets.</li>
+          <li><strong>Complete Algorithmic Transparency:</strong> Growth prompts and feedback synthesis rely exclusively on transparent mathematical formulas and local rule-based heuristics.</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h2><span class="section-idx">04.</span> Cryptographic Integrity and Peer Verification</h2>
+        <p>
+          To protect your reputation archive from falsification or unauthorized modification, spheRate applies SHA-256 cryptographic hashing and digital JWT signatures to peer submissions.
+        </p>
+        <p>
+          These verification tokens validate that feedback payloads have not been altered in transit or corrupted in storage. All cryptographic verification occurs directly on your client device.
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2><span class="section-idx">05.</span> Data Export, Portability, and Deletion Rights</h2>
+        <p>
+          You retain 100% control over your data lifecycle at all times.
+        </p>
+        <ul>
+          <li><strong>Instant JSON Export:</strong> Export your complete reputation vault, feedback history, and quarterly goals as an encrypted or unencrypted JSON file with a single click.</li>
+          <li><strong>Calendar Sync (RFC 5545):</strong> Export review reminders directly to iCal / Google Calendar format (<code>.ics</code>).</li>
+          <li><strong>Right to Erase:</strong> You may instantly purge all local application data via the Settings & Storage view. Deleting the app data file from your Google Drive <code>appDataFolder</code> permanently removes all cloud backup copies.</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h2><span class="section-idx">06.</span> Security Standards</h2>
+        <p>
+          We employ industry-standard encryption protocols to protect data during local storage and transit:
+        </p>
+        <ul>
+          <li>TLS 1.3 encryption for all HTTPS network communication.</li>
+          <li>Client-side AES-GCM 256-bit encryption for export archives.</li>
+          <li>OAuth 2.0 token isolation with zero server-side credential persistence.</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h2><span class="section-idx">07.</span> Contact and Controller Inquiries</h2>
+        <p>
+          Because spheRate operates as a zero-knowledge local client application, we do not store your private feedback on our servers. For technical or privacy questions regarding our architecture, please contact:
+        </p>
+        <div class="callout-box">
+          <div class="callout-title">spheRate Privacy & Architecture Team</div>
+          <p style="margin-bottom: 4px;"><strong>Email:</strong> <a href="mailto:support@matterof.biz">support@matterof.biz</a></p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-bar">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          &copy; <span id="yearVal">2026</span> spheRate. Sovereign Personal Feedback Vault.
+        </div>
+        <div style="display: flex; gap: 20px;">
+          <a href="/landing.html">Overview</a>
+          <a href="/privacy.html" style="color: var(--text-primary); font-weight: 600;">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('yearVal').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
