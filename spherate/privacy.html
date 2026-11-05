@@ -6,7 +6,7 @@
   <title>Privacy Policy — spheRate Sovereign Feedback Vault</title>
   <meta name="description" content="Privacy Policy for spheRate. Learn about our client-side zero-knowledge architecture, Bring Your Own Storage (BYOS) Google Drive integration, and data sovereignty commitments." />
   <meta property="og:title" content="Privacy Policy — spheRate" />
-  <meta property="og:description" content="spheRate Privacy Policy: Zero-knowledge client-side encryption, local storage sovereignty, and transparent API usage." />
+  <meta property="og:description" content="spheRate Privacy Policy: Local-first storage, a Google Drive backup you control, and transparent API usage." />
   <link rel="icon" type="image/svg+xml" href="/icon.svg" />
 
   <!-- Google Fonts: Plus Jakarta Sans & Manrope -->
@@ -370,12 +370,12 @@
       </div>
 
       <div class="policy-section">
-        <h2><span class="section-idx">04.</span> Cryptographic Integrity and Peer Verification</h2>
+        <h2><span class="section-idx">04.</span> Rater Details and Integrity Checksums</h2>
         <p>
-          To protect your reputation archive from falsification or unauthorized modification, spheRate applies SHA-256 cryptographic hashing and digital JWT signatures to peer submissions.
+          When someone submits feedback, the name and email they type are stored with their response exactly as entered. spheRate does not verify them and does not sign raters in through Google, LinkedIn or any other identity provider.
         </p>
         <p>
-          These verification tokens validate that feedback payloads have not been altered in transit or corrupted in storage. All cryptographic verification occurs directly on your client device.
+          Each entry also stores a SHA-256 checksum of its content so that accidental corruption can be noticed. The checksum is not a digital signature and does not prevent someone with access to your data from editing an entry. It is computed on your device.
         </p>
       </div>
 
@@ -385,7 +385,7 @@
           You retain 100% control over your data lifecycle at all times.
         </p>
         <ul>
-          <li><strong>Instant JSON Export:</strong> Export your complete reputation vault, feedback history, and quarterly goals as an encrypted or unencrypted JSON file with a single click.</li>
+          <li><strong>Instant JSON Export:</strong> Export your complete reputation vault, feedback history, and quarterly goals as a JSON file (not encrypted) with a single click.</li>
           <li><strong>Calendar Sync (RFC 5545):</strong> Export review reminders directly to iCal / Google Calendar format (<code>.ics</code>).</li>
           <li><strong>Right to Erase:</strong> You may instantly purge all local application data via the Settings & Storage view. Deleting the app data file from your Google Drive <code>appDataFolder</code> permanently removes all cloud backup copies.</li>
         </ul>
@@ -394,11 +394,11 @@
       <div class="policy-section">
         <h2><span class="section-idx">06.</span> Security Standards</h2>
         <p>
-          We employ industry-standard encryption protocols to protect data during local storage and transit:
+          Security measures:
         </p>
         <ul>
           <li>TLS 1.3 encryption for all HTTPS network communication.</li>
-          <li>Client-side AES-GCM 256-bit encryption for export archives.</li>
+          <li>spheRate does not add its own encryption to data stored on your device, in your Google Drive app folder, or in exported JSON files. Those are protected by your device security and your Google account.</li>
           <li>OAuth 2.0 token isolation with zero server-side credential persistence.</li>
         </ul>
       </div>
