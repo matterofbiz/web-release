@@ -4,15 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy Policy — spheRate Sovereign Feedback Vault</title>
-  <meta name="description" content="Privacy Policy for spheRate. Learn about our client-side zero-knowledge architecture, Bring Your Own Storage (BYOS) Google Drive integration, and data sovereignty commitments." />
+  <meta name="description" content="Privacy Policy for spheRate. Your feedback is stored only on your device, the app makes no network connections, and you can export or delete your data at any time." />
   <meta property="og:title" content="Privacy Policy — spheRate" />
-  <meta property="og:description" content="spheRate Privacy Policy: Local-first storage, a Google Drive backup you control, and transparent API usage." />
+  <meta property="og:description" content="spheRate Privacy Policy: local-first storage on your device, no network connections, no trackers and no AI processing." />
   <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-
-  <!-- Google Fonts: Plus Jakarta Sans & Manrope -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -27,9 +22,9 @@
       --accent-indigo: #6366f1;
       --accent-sky: #38bdf8;
       --accent-emerald: #10b981;
-      --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      --font-body: 'Manrope', system-ui, -apple-system, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --font-display: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
     }
 
     * {
@@ -319,60 +314,76 @@
       <div class="policy-header">
         <span class="policy-tag">Data Sovereignty & Privacy Architecture</span>
         <h1>Privacy Policy</h1>
-        <div class="effective-date">Effective Date: March 31, 2026 · Version 1.0</div>
+        <div class="effective-date">Effective Date: November 6, 2026 · Version 1.3</div>
       </div>
 
       <!-- Core Principle Callout -->
       <div class="callout-box highlight">
-        <div class="callout-title">The spheRate Sovereignty Pledge</div>
+        <div class="callout-title">The short version</div>
         <p style="margin-bottom: 0;">
-          <strong>spheRate</strong> is built from the ground up as a zero-knowledge, client-side personal feedback vault. We believe your reputation, ratings, and peer feedback belong exclusively to you—not to corporate HR silos, advertising tracking networks, or central servers.
+          <strong>spheRate</strong> is a local-first personal feedback app. Your reviews, ratings and goals are stored on your device, and <strong>the app makes no network connections</strong>: no sign-in, no cloud sync, no analytics, no advertising and no tracking. The spheRate developers never receive your data. You can export a backup file and import it again whenever you like.
         </p>
       </div>
 
       <div class="policy-section">
         <h2><span class="section-idx">01.</span> Scope and Fundamental Principles</h2>
         <p>
-          This Privacy Policy governs the spheRate web application, mobile bindings, and associated services. By using spheRate, you benefit from a local-first software architecture designed to operate without central tracking, user profiling, or secondary data sales.
+          This Privacy Policy covers the spheRate Android app, the spheRate web app, and this website. spheRate has no user accounts and no spheRate-run database of user feedback.
         </p>
         <ul>
-          <li><strong>Zero Tracking Cookies:</strong> We do not deploy behavioral tracking cookies, Facebook Pixels, Google Analytics scripts, or third-party advertising SDKs.</li>
-          <li><strong>No HR Centralization:</strong> Your data is never shared with or exposed to your employer, school, or external organizations unless you explicitly export or present your record.</li>
-          <li><strong>Data Minimization:</strong> We only process data required to compute your Net Promoter Score and render your local feedback dashboard.</li>
+          <li><strong>No trackers:</strong> The app and this website do not use analytics, advertising SDKs, tracking pixels or tracking cookies.</li>
+          <li><strong>No central copy:</strong> Your feedback is not sent to the spheRate developers, and is not shared with your employer, school or other organizations unless you export or send it yourself.</li>
+          <li><strong>No account:</strong> You do not sign in to anything to use spheRate.</li>
+          <li><strong>Data minimization:</strong> spheRate processes only what it needs to compute your Personal Net Promoter Score and show your dashboard.</li>
         </ul>
       </div>
 
       <div class="policy-section">
-        <h2><span class="section-idx">02.</span> Information Storage and Local Sovereignty</h2>
+        <h2><span class="section-idx">02.</span> Where Your Data Is Stored</h2>
         <p>
-          Unlike legacy cloud software, spheRate stores your primary application data—including 360-degree reviews, behavioral ratings, sphere tags, and goal progress—directly inside your client browser storage (IndexedDB / LocalStorage).
+          spheRate stores your 360-degree feedback, ratings, sphere tags and goals in your device's app storage (IndexedDB and local storage of the app's web view, or of your browser on the web).
         </p>
         <div class="callout-box">
           <div class="callout-title">How Storage Works</div>
           <ul>
-            <li><strong>Local Browser Storage:</strong> Reviews and ratings remain on your physical device until cleared or overwritten by you.</li>
-            <li><strong>Google Drive BYOS (Bring Your Own Storage):</strong> When you enable cloud backup, spheRate authenticates using OAuth 2.0 strictly requesting the isolated <code>https://www.googleapis.com/auth/drive.appdata</code> scope.</li>
-            <li><strong>Isolated App Sandbox:</strong> This scope restricts spheRate to a single hidden data file inside your personal Google Drive account. spheRate cannot read, scan, or access any other documents or files in your Google Drive.</li>
+            <li><strong>On your device only:</strong> Data stays on your device until you delete it, clear the app's storage or uninstall the app.</li>
+            <li><strong>No cloud copy:</strong> Because nothing is uploaded, nobody can restore your data for you. If you lose the phone, reset it, uninstall the app or clear its storage, your data is gone unless you exported a backup file first.</li>
+            <li><strong>Backups are files you control:</strong> You can export everything to a file and import it later (see section 06).</li>
           </ul>
         </div>
       </div>
 
       <div class="policy-section">
-        <h2><span class="section-idx">03.</span> No Artificial Intelligence (AI) Model Processing</h2>
+        <h2><span class="section-idx">03.</span> Network Connections and Third Parties</h2>
         <p>
-          <strong>spheRate does NOT use Artificial Intelligence (AI), Large Language Models (LLMs), or third-party Machine Learning services</strong> (such as Google Gemini, OpenAI, or Anthropic) to process, analyze, or train on your feedback data.
+          <strong>spheRate makes no network connections while you use it.</strong> The app does not contact analytics, advertising, crash-reporting, font, avatar, AI, sign-in or cloud-storage services. Rater profile pictures are never loaded from the internet.
         </p>
         <ul>
-          <li><strong>100% Deterministic Local Computing:</strong> All calculations—including Personal Net Promoter Score aggregation, 4-Sphere score distribution, behavioral trait breakdown, and growth prompts—are performed entirely on your client device using local, deterministic heuristic algorithms.</li>
-          <li><strong>Zero Model Training:</strong> Your review entries, ratings, comments, and personal information are never transmitted to any AI provider or used for model training or machine intelligence datasets.</li>
-          <li><strong>Complete Algorithmic Transparency:</strong> Growth prompts and feedback synthesis rely exclusively on transparent mathematical formulas and local rule-based heuristics.</li>
+          <li><strong>Files and invitations you send:</strong> When you export a backup, a PDF report or an <code>.ics</code> calendar file, or send a feedback invitation by email, the file or message goes to the app you pick (email, Drive, messaging, files and so on). The spheRate developers do not see it, and that app's provider's terms apply.</li>
+          <li><strong>Reminders:</strong> Month-end reminders are scheduled on your device. No push-notification service is involved.</li>
+          <li><strong>Links:</strong> If you tap a link, for example to open Google Play, it opens in another app or your browser, which is governed by that site's own policy.</li>
+          <li><strong>This website:</strong> The overview and policy pages are static pages that load no third-party scripts, fonts or images. Our hosting provider may keep standard server logs (such as IP address, time and page requested).</li>
         </ul>
       </div>
 
       <div class="policy-section">
-        <h2><span class="section-idx">04.</span> Rater Details and Integrity Checksums</h2>
+        <h2><span class="section-idx">04.</span> No AI Processing</h2>
         <p>
-          When someone submits feedback, the name and email they type are stored with their response exactly as entered. spheRate does not verify them and does not sign raters in through Google, LinkedIn or any other identity provider.
+          <strong>spheRate does not send your feedback to any AI, large language model or machine-learning service, and does not use it to train models.</strong>
+        </p>
+        <ul>
+          <li><strong>Computed on your device:</strong> Personal Net Promoter Score, sphere breakdowns, trait summaries and growth prompts are produced on your device by fixed, rule-based calculations.</li>
+          <li><strong>If this changes:</strong> We will update this policy first, and no feedback will leave your device for such a purpose without your explicit opt-in.</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h2><span class="section-idx">05.</span> People in Your Feedback</h2>
+        <p>
+          Feedback includes personal information about other people: the name and email a rater types, their comments, and their relationship to you. These details are stored exactly as entered, only on your device (and in any backup file you create). spheRate does not verify them and does not sign raters in through Google, LinkedIn or any other identity provider.
+        </p>
+        <p>
+          Because the spheRate developers hold no copy, a rater who wants their feedback corrected or removed needs to ask you, the person who holds it. You are responsible for how you use and share what others have told you, including any backup file you make.
         </p>
         <p>
           Each entry also stores a SHA-256 checksum of its content so that accidental corruption can be noticed. The checksum is not a digital signature and does not prevent someone with access to your data from editing an entry. It is computed on your device.
@@ -380,36 +391,39 @@
       </div>
 
       <div class="policy-section">
-        <h2><span class="section-idx">05.</span> Data Export, Portability, and Deletion Rights</h2>
-        <p>
-          You retain 100% control over your data lifecycle at all times.
-        </p>
+        <h2><span class="section-idx">06.</span> Export, Import, Deletion and Your Choices</h2>
         <ul>
-          <li><strong>Instant JSON Export:</strong> Export your complete reputation vault, feedback history, and quarterly goals as a JSON file (not encrypted) with a single click.</li>
-          <li><strong>Calendar Sync (RFC 5545):</strong> Export review reminders directly to iCal / Google Calendar format (<code>.ics</code>).</li>
-          <li><strong>Right to Erase:</strong> You may instantly purge all local application data via the Settings & Storage view. Deleting the app data file from your Google Drive <code>appDataFolder</code> permanently removes all cloud backup copies.</li>
+          <li><strong>Export:</strong> In the app, open <em>Data &amp; Backup</em> and choose <em>Export backup file</em>. This saves everything as one JSON file (not encrypted). You can also export a PDF report or <code>.ics</code> calendar reminders. On Android these open the system share sheet so you choose where the file goes.</li>
+          <li><strong>Import:</strong> In <em>Data &amp; Backup</em>, choose <em>Choose backup file</em>. The file is checked on your device and nothing changes until you confirm. You can add only what is missing, or replace everything on the device. Nothing is uploaded.</li>
+          <li><strong>Delete everything:</strong> In <em>Data &amp; Backup</em>, choose <em>Delete all data</em>. This removes your feedback and goals from the device. Backup files you exported and copies you shared are not deleted by the app: delete those yourself.</li>
+          <li><strong>Uninstalling</strong> the app, or clearing its storage in Android settings, permanently removes the data stored on the device.</li>
+          <li><strong>Your rights:</strong> Depending on where you live you may have rights over personal data. Because we do not hold your feedback, the controls above are the fastest way to use them. You can also contact us below.</li>
         </ul>
       </div>
 
       <div class="policy-section">
-        <h2><span class="section-idx">06.</span> Security Standards</h2>
-        <p>
-          Security measures:
-        </p>
+        <h2><span class="section-idx">07.</span> Security</h2>
         <ul>
-          <li>TLS 1.3 encryption for all HTTPS network communication.</li>
-          <li>spheRate does not add its own encryption to data stored on your device, in your Google Drive app folder, or in exported JSON files. Those are protected by your device security and your Google account.</li>
-          <li>OAuth 2.0 token isolation with zero server-side credential persistence.</li>
+          <li>spheRate does not add its own encryption to data stored on your device or to exported files. They are protected by your device lock.</li>
+          <li>Anyone who can unlock your device, or who gets a copy of your backup file, can read your spheRate data. Use a screen lock and keep backup files in a private place.</li>
+          <li>Because the app makes no network connections, your data is not sent over the internet by spheRate.</li>
         </ul>
       </div>
 
       <div class="policy-section">
-        <h2><span class="section-idx">07.</span> Contact and Controller Inquiries</h2>
+        <h2><span class="section-idx">08.</span> Changes to This Policy</h2>
         <p>
-          Because spheRate operates as a zero-knowledge local client application, we do not store your private feedback on our servers. For technical or privacy questions regarding our architecture, please contact:
+          We will change the effective date and version above whenever this policy changes. Version 1.3 (November 6, 2026) removes the optional Google Drive backup and Google sign-in described in earlier drafts: spheRate no longer connects to Google Drive or to any other service, and backups are export and import files that you control.
+        </p>
+      </div>
+
+      <div class="policy-section">
+        <h2><span class="section-idx">09.</span> Contact</h2>
+        <p>
+          For privacy questions or requests, please contact:
         </p>
         <div class="callout-box">
-          <div class="callout-title">spheRate Privacy & Architecture Team</div>
+          <div class="callout-title">spheRate Privacy &amp; Support</div>
           <p style="margin-bottom: 4px;"><strong>Email:</strong> <a href="mailto:support@matterof.biz">support@matterof.biz</a></p>
         </div>
       </div>

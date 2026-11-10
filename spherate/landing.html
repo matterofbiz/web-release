@@ -4,16 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>spheRate — Sovereign 360° Personal Feedback & Continuous Reputation Vault</title>
-  <meta name="description" content="Own your reputation across Professional, Educational, Personal, and Civic spheres. Private, zero-knowledge 360° feedback and Personal Net Promoter Score." />
+  <meta name="description" content="Own your reputation across Professional, Educational, Personal, and Civic spheres. Private, local-first 360° feedback and Personal Net Promoter Score." />
   <meta property="og:title" content="spheRate — Sovereign 360° Personal Feedback" />
-  <meta property="og:description" content="A private, user-owned Net Promoter Score vault for your whole life. Local-first storage, four life spheres, and an optional private Google Drive backup." />
+  <meta property="og:description" content="A private, user-owned Net Promoter Score vault for your whole life. Local-first storage, four life spheres, and backup by export and import." />
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/svg+xml" href="/icon.svg" />
 
-  <!-- Google Fonts: Plus Jakarta Sans (Display), Manrope (Body), JetBrains Mono (Metrics & Tabular) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -32,9 +28,9 @@
       --accent-emerald: #10b981;
       --accent-amber: #f59e0b;
       --accent-rose: #f43f5e;
-      --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      --font-body: 'Manrope', system-ui, -apple-system, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --font-display: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
     }
 
     * {
@@ -706,49 +702,6 @@
       border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    /* Testimonials (Personas) */
-    .persona-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .persona-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .persona-quote {
-      font-size: 0.9375rem;
-      line-height: 1.6;
-      color: var(--text-secondary);
-      margin-bottom: 24px;
-    }
-
-    .persona-author {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      border-top: 1px solid var(--border-subtle);
-      padding-top: 16px;
-    }
-
-    .persona-name {
-      font-size: 0.875rem;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-
-    .persona-role {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
     /* Pricing Section */
     .pricing-toggle-wrap {
       display: flex;
@@ -996,9 +949,6 @@
       .sim-grid {
         grid-template-columns: 1fr;
       }
-      .persona-grid {
-        grid-template-columns: 1fr;
-      }
       .pricing-grid {
         grid-template-columns: 1fr;
       }
@@ -1051,7 +1001,7 @@
         <nav class="nav-links">
           <a href="#spheres" class="nav-link">Four Spheres</a>
           <a href="#simulator" class="nav-link">NPS Simulator</a>
-          <a href="#architecture" class="nav-link">Zero-Knowledge Vault</a>
+          <a href="#architecture" class="nav-link">Privacy</a>
           <a href="#pricing" class="nav-link">Pricing</a>
           <a href="#faq" class="nav-link">FAQ</a>
         </nav>
@@ -1075,7 +1025,7 @@
   <div class="mobile-drawer" id="mobileDrawer">
     <a href="#spheres" class="nav-link mobile-link">Four Spheres</a>
     <a href="#simulator" class="nav-link mobile-link">NPS Simulator</a>
-    <a href="#architecture" class="nav-link mobile-link">Zero-Knowledge Vault</a>
+    <a href="#architecture" class="nav-link mobile-link">Privacy</a>
     <a href="#pricing" class="nav-link mobile-link">Pricing</a>
     <a href="#faq" class="nav-link mobile-link">FAQ</a>
     <a href="/" class="btn btn-primary" style="margin-top: 8px;">Launch Web App</a>
@@ -1090,7 +1040,7 @@
           <h1 class="hero-title">Own Your Reputation Across Every Sphere of Life.</h1>
           <p class="hero-description">
             Traditional corporate 360 reviews are siloed, politicized, and owned by HR. 
-            <strong>spheRate</strong> is your sovereign feedback vault: continuous, multi-sphere Net Promoter Score tracking stored on your device, with an optional private Google Drive backup.
+            <strong>spheRate</strong> is your sovereign feedback vault: continuous, multi-sphere Net Promoter Score tracking stored on your device, with backup by export and import.
           </p>
           
           <div class="hero-actions">
@@ -1102,17 +1052,17 @@
           <div class="proof-strip">
             <span class="proof-item">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Zero Server Footprint</span>
+              <span>No Servers for Your Data</span>
             </span>
             <span class="proof-separator">·</span>
             <span class="proof-item">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Client-Side AES-256</span>
+              <span>No Trackers or Ads</span>
             </span>
             <span class="proof-separator">·</span>
             <span class="proof-item">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Google Drive BYOS</span>
+              <span>Export &amp; Import Backup</span>
             </span>
             <span class="proof-separator">·</span>
             <span class="proof-item">
@@ -1188,7 +1138,7 @@
           <ul class="comparison-list">
             <li>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>User-Owned for Life:</strong> Stored locally and backed up directly to your personal Google Drive via BYOS zero-knowledge architecture.</span>
+              <span><strong>User-Owned for Life:</strong> Stored locally on your device, with backups you export and keep yourself.</span>
             </li>
             <li>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1280,35 +1230,35 @@
           <div>
             <div class="sim-slider-wrap">
               <div class="sim-slider-label">
-                <span style="font-weight: 600; font-size: 0.9375rem;">Simulate Peer Score (0 to 10):</span>
-                <span class="sim-score-display tabular-nums" id="simScoreVal">9</span>
+                <span style="font-weight: 600; font-size: 0.9375rem;">Simulate Peer Rating (1 to 5 stars):</span>
+                <span class="sim-score-display tabular-nums" id="simScoreVal">5</span>
               </div>
               <input 
                 type="range" 
-                min="0" 
-                max="10" 
-                value="9" 
+                min="1" 
+                max="5" 
+                step="1" 
+                value="5" 
                 class="nps-slider" 
                 id="npsSlider"
-                aria-label="Peer NPS rating slider from 0 to 10" 
+                aria-label="Peer rating slider from 1 to 5 stars" 
               />
               <div class="nps-ticks">
-                <span>0 (Detractor)</span>
-                <span>6</span>
-                <span>7 (Passive)</span>
-                <span>8</span>
-                <span>9 (Promoter)</span>
-                <span>10</span>
+                <span>1 (Detractor)</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4 (Passive)</span>
+                <span>5 (Promoter)</span>
               </div>
             </div>
 
             <div class="sim-classification" id="simClassificationBox">
               <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                <strong id="simTierName" style="color: var(--accent-emerald); font-size: 1rem;">Promoter (Score 9–10)</strong>
+                <strong id="simTierName" style="color: var(--accent-emerald); font-size: 1rem;">Promoter (5 stars)</strong>
                 <span id="simSphereTag" class="tabular-nums" style="font-size: 0.75rem; color: var(--text-muted);">Weight: +1.0</span>
               </div>
               <p id="simTierFeedback" style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5;">
-                "Consistently elevates the entire engineering squad. Would enthusiastically build another company with this person."
+                "Exceptional cross-functional partner. Elevates the whole team and sets standard for psychological safety."
               </p>
             </div>
           </div>
@@ -1319,26 +1269,26 @@
             <p style="font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 16px;">Based on simulated peer sample pool</p>
 
             <div class="ratio-bar">
-              <div class="ratio-detractors" id="barDetractors" style="width: 10%;"></div>
-              <div class="ratio-passives" id="barPassives" style="width: 20%;"></div>
-              <div class="ratio-promoters" id="barPromoters" style="width: 70%;"></div>
+              <div class="ratio-detractors" id="barDetractors" style="width: 5%;"></div>
+              <div class="ratio-passives" id="barPassives" style="width: 15%;"></div>
+              <div class="ratio-promoters" id="barPromoters" style="width: 80%;"></div>
             </div>
 
             <div class="formula-line">
               <span style="color: var(--accent-emerald);">Promoters (%):</span>
-              <span class="tabular-nums" id="dispPromoterPct">70%</span>
+              <span class="tabular-nums" id="dispPromoterPct">80%</span>
             </div>
             <div class="formula-line">
               <span style="color: var(--accent-amber);">Passives (%):</span>
-              <span class="tabular-nums" id="dispPassivePct">20%</span>
+              <span class="tabular-nums" id="dispPassivePct">15%</span>
             </div>
             <div class="formula-line">
               <span style="color: var(--accent-rose);">Detractors (%):</span>
-              <span class="tabular-nums" id="dispDetractorPct">10%</span>
+              <span class="tabular-nums" id="dispDetractorPct">5%</span>
             </div>
             <div class="formula-line">
               <span>Personal Net Promoter Score:</span>
-              <span class="tabular-nums" id="dispCalculatedNPS" style="color: var(--accent-indigo); font-size: 1.5rem;">+60</span>
+              <span class="tabular-nums" id="dispCalculatedNPS" style="color: var(--accent-indigo); font-size: 1.5rem;">+75</span>
             </div>
           </div>
         </div>
@@ -1346,24 +1296,24 @@
     </div>
   </section>
 
-  <!-- Zero-Knowledge Architecture & Privacy -->
+  <!-- Local-first storage & privacy -->
   <section class="section-wrap" id="architecture">
     <div class="container">
       <div class="section-header">
         <span class="section-num">04. Privacy First</span>
-        <h2 class="section-title">Zero-Knowledge Storage Architecture</h2>
+        <h2 class="section-title">Local-First Storage</h2>
         <p class="section-subhead">
-          We never store your feedback reviews on centralized servers. Your vault lives in your browser and syncs exclusively to your private Google Drive app folder.
+          spheRate has no server that receives your feedback. Your vault lives on your device, and you back it up by exporting a file.
         </p>
       </div>
 
       <div class="bento-grid">
         <div class="bento-card span-2">
           <div>
-            <span style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--accent-sky); letter-spacing: 0.08em;">BYOS Infrastructure</span>
-            <h4>Bring Your Own Storage (Google Drive AppData)</h4>
+            <span style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--accent-sky); letter-spacing: 0.08em;">Local Storage</span>
+            <h4>Your Data Stays On Your Device</h4>
             <p>
-              spheRate connects directly to Google Drive's sandboxed <code>appDataFolder</code> scope. Only client-side tokens generated in your browser are used. No central server has access to decrypt or inspect your records.
+              spheRate keeps your vault in your device's own app storage and makes no network connections. The spheRate developers keep no copy of your records. spheRate does not add its own encryption, so your data is protected by your device lock. Export a backup file to keep it safe.
             </p>
           </div>
           <img 
@@ -1391,7 +1341,7 @@
           <span style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--accent-indigo); letter-spacing: 0.08em;">Portability</span>
           <h4>JSON & RFC 5545 Export</h4>
           <p>
-            Export your entire reputation archive as a JSON file with one click. Sync review cadences directly to Google Calendar, Apple Calendar, or Outlook.
+            Export your entire feedback archive as a JSON file with one click, and import it again on any device. Export review reminders as a calendar file for Google Calendar, Apple Calendar, or Outlook.
           </p>
         </div>
 
@@ -1414,59 +1364,14 @@
     </div>
   </section>
 
-  <!-- Attributable Personas / Social Proof -->
-  <section class="section-wrap">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-num">05. Proven in the Real World</span>
-        <h2 class="section-title">Built for Sovereign Professionals</h2>
-        <p class="section-subhead">
-          Read how leaders, academics, and founders use spheRate to safeguard their reputation across organizational transitions.
-        </p>
-      </div>
-
-      <div class="persona-grid">
-        <div class="persona-card">
-          <p class="persona-quote">
-            "When I resigned as Principal Architect to consult independently, my previous employer's Workday records were wiped clean. spheRate gave me 3 years of continuous peer NPS data that landed my first enterprise contracts."
-          </p>
-          <div class="persona-author">
-            <span class="persona-name">Elena Vance</span>
-            <span class="persona-role">Staff Distributed Systems Consultant, Zurich</span>
-          </div>
-        </div>
-
-        <div class="persona-card">
-          <p class="persona-quote">
-            "Traditional student evaluations are notoriously noisy. By soliciting structured Educational Sphere feedback through spheRate, my graduate researchers provide candid advice that actively reshapes my curriculum every semester."
-          </p>
-          <div class="persona-author">
-            <span class="persona-name">Dr. Marcus Chen</span>
-            <span class="persona-role">Associate Dean of Computer Science, Cambridge</span>
-          </div>
-        </div>
-
-        <div class="persona-card">
-          <p class="persona-quote">
-            "Balancing executive authority with human empathy is hard. Having my Civic and Personal spheres measured alongside startup execution keeps my ego grounded and my team retention above 95%."
-          </p>
-          <div class="persona-author">
-            <span class="persona-name">Tariq Al-Mansoor</span>
-            <span class="persona-role">Co-Founder & CEO, Meridian Robotics</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Pricing Tier Section -->
   <section class="section-wrap" id="pricing">
     <div class="container">
       <div class="section-header" style="text-align: center; margin-left: auto; margin-right: auto;">
-        <span class="section-num">06. Transparent Investment</span>
+        <span class="section-num">05. Transparent Investment</span>
         <h2 class="section-title">Invest in Your Lifetime Reputation</h2>
         <p class="section-subhead">
-          Start with zero commitment. Upgrade to continuous automated sync and quarterly AI growth coaching when you're ready.
+          Start with zero commitment. Upgrade to deeper insights, reminders and PDF reports when you're ready.
         </p>
       </div>
 
@@ -1524,7 +1429,7 @@
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Automatic Google Drive BYOS Background Cloud Sync</span>
+                <span>Monthly Review Reminders &amp; PDF Reports</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1550,7 +1455,7 @@
   <section class="section-wrap" id="faq">
     <div class="container">
       <div class="section-header" style="text-align: center; margin-left: auto; margin-right: auto;">
-        <span class="section-num">07. Clear Answers</span>
+        <span class="section-num">06. Clear Answers</span>
         <h2 class="section-title">Frequently Asked Questions</h2>
         <p class="section-subhead">
           Everything you need to know about privacy, data sovereignty, and the Personal Net Promoter Score algorithm.
@@ -1564,7 +1469,7 @@
             <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-answer">
-            You do, entirely and irrevocably. Unlike enterprise SaaS feedback systems where your data belongs to your employer's corporate tenant, spheRate runs client-side in your personal browser and syncs directly to your own Google Drive storage. No corporate HR admin or platform engineer can ever access, modify, or inspect your ratings.
+            You do. Unlike enterprise SaaS feedback systems where your data belongs to your employer's corporate tenant, spheRate stores your data on your device only. The spheRate developers keep no copy, and no employer or platform administrator has access unless you share it with them.
           </div>
         </div>
 
@@ -1574,7 +1479,7 @@
             <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-answer">
-            Just like customer NPS, peers evaluate their likelihood to actively collaborate with or recommend you on a scale from 0 to 10. Ratings 9–10 are Promoters, 7–8 are Passives, and 0–6 are Detractors. Your score is calculated as <code>% Promoters - % Detractors</code>, resulting in a metric between -100 and +100.
+            Based on the Net Promoter Score idea, peers rate their experience of working with you from 1 to 5 stars. A 5-star rating is a Promoter, 4 stars is a Passive, and 1 to 3 stars are Detractors. Your score is calculated as <code>% Promoters - % Detractors</code>, resulting in a metric between -100 and +100.
           </div>
         </div>
 
@@ -1584,27 +1489,27 @@
             <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-answer">
-            No. spheRate operates with zero tracking cookies and zero company databases. All reviews are stored in your device's local app storage and, if you enable it, your personal Drive folder. You decide if and when to share excerpts of your feedback history.
+            No. spheRate operates with zero tracking cookies and zero company databases. All reviews are stored in your device's local app storage. You decide if and when to share excerpts of your feedback history.
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>How does the Google Drive BYOS (Bring Your Own Storage) work?</span>
+            <span>How do I back up or move my data?</span>
             <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-answer">
-            spheRate utilizes Google Drive's specialized <code>drive.appdata</code> scope. This grants the client application permission only to write and read its own single JSON file inside an isolated sandbox on your personal Google Drive. It cannot access, see, or touch your documents, photos, or emails.
+            Open Data &amp; Backup in the app and export a backup file, then import it on the same or another device. You can add only what is missing, or replace everything. Keep the file somewhere private: it is not encrypted and contains other people's names, emails and comments. There is no cloud copy, so the backup file is the only way to recover your data if you lose your phone.
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>Is there an Android, iOS, or desktop app?</span>
+            <span>Which devices can I use spheRate on?</span>
             <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-answer">
-            Yes! spheRate is built with modern progressive web technology and Capacitor mobile bindings. You can run it immediately on any desktop or mobile browser, or build native packages for Android (APK), iOS, and Tauri desktop using our automated GitHub release pipelines.
+            spheRate is built as an Android app, and it also runs in modern desktop and mobile web browsers.
           </div>
         </div>
       </div>
@@ -1669,7 +1574,7 @@
         </ul>
 
         <div>
-          &copy; <span id="yearVal">2026</span> spheRate. Zero-Knowledge Personal Feedback Vault.
+          &copy; <span id="yearVal">2026</span> spheRate. Personal Feedback Vault.
         </div>
       </div>
     </div>
@@ -1792,20 +1697,21 @@
         const score = parseInt(val, 10);
         simScoreVal.textContent = score;
 
-        let detPct = 10;
-        let pasPct = 20;
-        let proPct = 70;
+        let detPct = 5;
+        let pasPct = 15;
+        let proPct = 80;
 
-        if (score <= 6) {
-          simTierName.textContent = 'Detractor (Score 0–6)';
+        // Same rule as the app: 5 stars = Promoter, 4 = Passive, 1 to 3 = Detractor.
+        if (score <= 3) {
+          simTierName.textContent = 'Detractor (1–3 stars)';
           simTierName.style.color = 'var(--accent-rose)';
           simSphereTag.textContent = 'Weight: -1.0';
           simTierFeedback.textContent = '"Communication feels clinical and unsupportive during high-friction sprints. Often works in a silo."';
-          detPct = Math.min(65, 30 + (6 - score) * 6);
+          detPct = [65, 48, 30][score - 1]; // 1 star: 65%, 2 stars: 48%, 3 stars: 30% (cohort NPS -50, -16, +20)
           pasPct = 20;
           proPct = 100 - detPct - pasPct;
-        } else if (score <= 8) {
-          simTierName.textContent = 'Passive (Score 7–8)';
+        } else if (score === 4) {
+          simTierName.textContent = 'Passive (4 stars)';
           simTierName.style.color = 'var(--accent-amber)';
           simSphereTag.textContent = 'Weight: 0.0 (Neutral)';
           simTierFeedback.textContent = '"Reliable execution, meets deadlines without issue, but rarely initiates strategic mentorship or proactive fixes."';
@@ -1813,7 +1719,7 @@
           pasPct = 45;
           proPct = 40;
         } else {
-          simTierName.textContent = 'Promoter (Score 9–10)';
+          simTierName.textContent = 'Promoter (5 stars)';
           simTierName.style.color = 'var(--accent-emerald)';
           simSphereTag.textContent = 'Weight: +1.0';
           simTierFeedback.textContent = '"Exceptional cross-functional partner. Elevates the whole team and sets standard for psychological safety."';
@@ -1838,6 +1744,7 @@
         npsSlider.addEventListener('input', function (e) {
           updateSimulator(e.target.value);
         });
+        updateSimulator(npsSlider.value); // first paint always matches the script
       }
 
       // 5. Billing Toggle
