@@ -1313,7 +1313,7 @@
             <span style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--accent-sky); letter-spacing: 0.08em;">Local Storage</span>
             <h4>Your Data Stays On Your Device</h4>
             <p>
-              spheRate keeps your vault in your device's own app storage and makes no network connections. The spheRate developers keep no copy of your records. spheRate does not add its own encryption, so your data is protected by your device lock. Export a backup file to keep it safe.
+              spheRate keeps your vault in your device's own app storage, and the app's own code makes no network connections. The only thing that talks to the internet on your behalf is Google Play, if you subscribe to Pro. The spheRate developers keep no copy of your records. spheRate does not add its own encryption, so your data is protected by your device lock. Export a backup file to keep it safe.
             </p>
           </div>
           <img 
@@ -1371,17 +1371,10 @@
         <span class="section-num">05. Transparent Investment</span>
         <h2 class="section-title">Invest in Your Lifetime Reputation</h2>
         <p class="section-subhead">
-          Start with zero commitment. Upgrade to deeper insights, reminders and PDF reports when you're ready.
+          Start with zero commitment. Subscribe to Pro in the Android app for deeper insights, reminders and PDF reports when you're ready.
         </p>
       </div>
 
-      <!-- Billing Switcher -->
-      <div class="pricing-toggle-wrap">
-        <div class="pricing-toggle">
-          <button class="toggle-btn active" id="btnBillingAnnual">Annual (Save 20%)</button>
-          <button class="toggle-btn" id="btnBillingMonthly">Monthly</button>
-        </div>
-      </div>
 
       <div class="pricing-grid">
         <!-- Solo Vault (Free) -->
@@ -1393,23 +1386,27 @@
             <ul class="feature-list">
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Up to 15 Peer Reviews</span>
+                <span>Unlimited peer reviews and feedback entries</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Full 4-Sphere Breakdown (Prof, Edu, Pers, Civic)</span>
+                <span>Four life spheres, Personal NPS gauge and feedback stream</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Local-First Storage (no spheRate servers)</span>
+                <span>360° invite links: raters reply by email or message (no spheRate server)</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>JSON Backup Export & Import</span>
+                <span>Quarterly goals and calendar (.ics) export</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Interactive NPS Calculator & Trait Analyzer</span>
+                <span>Local-first storage (no spheRate servers)</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>JSON backup export &amp; import</span>
               </li>
             </ul>
           </div>
@@ -1420,32 +1417,28 @@
         <div class="pricing-card featured">
           <div>
             <span style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--accent-indigo); letter-spacing: 0.08em;">Continuous Pro</span>
-            <div class="price-num tabular-nums" id="proPriceVal">$76<span style="font-size: 1rem; font-weight: 500; color: var(--text-muted);">/yr</span></div>
-            <div class="price-sub" id="proPricePeriod">Billed annually ($6.33/mo equivalent)</div>
+            <div class="price-num tabular-nums" id="proPriceVal">Monthly</div>
+            <div class="price-sub" id="proPricePeriod">Subscription billed monthly through Google Play. The price is shown in Google Play before you subscribe. Cancel anytime in Google Play.</div>
             <ul class="feature-list">
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span><strong>Unlimited</strong> Peer Reviews & Spheres</span>
+                <span>Per-sphere analytics, trendlines and relationship breakdowns</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Monthly Review Reminders &amp; PDF Reports</span>
+                <span>Behavioral traits cloud with matching entries</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Quarterly Behavioral Growth Coaching & Insights</span>
+                <span>Month-end review reminders (phone notifications)</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>RFC 5545 Calendar Integration (.ics)</span>
-              </li>
-              <li>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Content Integrity Checksums</span>
+                <span>PDF report export</span>
               </li>
             </ul>
           </div>
-          <a href="/?tier=pro" class="btn btn-primary" style="width: 100%;">Upgrade to Pro Vault</a>
+          <a href="/" class="btn btn-primary" style="width: 100%;">Open the app to upgrade</a>
         </div>
       </div>
     </div>
@@ -1745,28 +1738,6 @@
           updateSimulator(e.target.value);
         });
         updateSimulator(npsSlider.value); // first paint always matches the script
-      }
-
-      // 5. Billing Toggle
-      const btnBillingAnnual = document.getElementById('btnBillingAnnual');
-      const btnBillingMonthly = document.getElementById('btnBillingMonthly');
-      const proPriceVal = document.getElementById('proPriceVal');
-      const proPricePeriod = document.getElementById('proPricePeriod');
-
-      if (btnBillingAnnual && btnBillingMonthly && proPriceVal && proPricePeriod) {
-        btnBillingAnnual.addEventListener('click', function () {
-          btnBillingAnnual.classList.add('active');
-          btnBillingMonthly.classList.remove('active');
-          proPriceVal.innerHTML = '$76<span style="font-size: 1rem; font-weight: 500; color: var(--text-muted);">/yr</span>';
-          proPricePeriod.textContent = 'Billed annually ($6.33/mo equivalent)';
-        });
-
-        btnBillingMonthly.addEventListener('click', function () {
-          btnBillingMonthly.classList.add('active');
-          btnBillingAnnual.classList.remove('active');
-          proPriceVal.innerHTML = '$8<span style="font-size: 1rem; font-weight: 500; color: var(--text-muted);">/mo</span>';
-          proPricePeriod.textContent = 'Billed monthly. Cancel anytime.';
-        });
       }
 
       // 6. Interactive FAQ Accordion
