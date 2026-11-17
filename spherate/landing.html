@@ -9,969 +9,7 @@
   <meta property="og:description" content="A private, user-owned Net Promoter Score vault for your whole life. Local-first storage, four life spheres, and backup by export and import." />
   <meta property="og:type" content="website" />
   <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-
-
-  <style>
-    :root {
-      --bg-canvas: #07090e;
-      --bg-surface: #0e131f;
-      --bg-surface-elevated: #141c2e;
-      --bg-surface-subtle: rgba(255, 255, 255, 0.03);
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-focus: rgba(99, 102, 241, 0.5);
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
-      --accent-indigo: #6366f1;
-      --accent-indigo-hover: #4f46e5;
-      --accent-sky: #38bdf8;
-      --accent-emerald: #10b981;
-      --accent-amber: #f59e0b;
-      --accent-rose: #f43f5e;
-      --font-display: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-      --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-      --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: var(--bg-canvas);
-      color: var(--text-primary);
-      font-family: var(--font-body);
-      font-size: 16px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-      selection-background-color: var(--accent-indigo);
-      selection-color: #ffffff;
-    }
-
-    ::selection {
-      background: var(--accent-indigo);
-      color: #ffffff;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* Container */
-    .container {
-      width: 100%;
-      max-width: 1240px;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 24px;
-      padding-right: 24px;
-    }
-
-    /* Typography */
-    h1, h2, h3, h4, .font-display {
-      font-family: var(--font-display);
-      letter-spacing: -0.025em;
-      text-wrap: balance;
-    }
-
-    .tabular-nums {
-      font-family: var(--font-mono);
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* Navigation Bar */
-    .header-bar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(7, 9, 14, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-subtle);
-      height: 72px;
-      display: flex;
-      align-items: center;
-    }
-
-    .nav-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 32px;
-      width: 100%;
-    }
-
-    .brand-zone {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      white-space: nowrap;
-      flex-shrink: 0;
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 1.25rem;
-      letter-spacing: -0.03em;
-    }
-
-    .brand-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(2, 132, 199, 0.15);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-
-    .nav-link {
-      font-size: 0.9375rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      white-space: nowrap;
-      flex-shrink: 0;
-      transition: color 0.15s ease;
-      position: relative;
-    }
-
-    .nav-link:hover {
-      color: var(--text-primary);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-shrink: 0;
-    }
-
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 10px 20px;
-      font-family: var(--font-body);
-      font-size: 0.875rem;
-      font-weight: 600;
-      white-space: nowrap;
-      flex-shrink: 0;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
-      border: 1px solid transparent;
-      text-decoration: none;
-    }
-
-    .btn-primary {
-      background: var(--accent-indigo);
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.15);
-      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.25);
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-indigo-hover);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
-    }
-
-    .btn-secondary {
-      background: var(--bg-surface-subtle);
-      color: var(--text-primary);
-      border-color: var(--border-subtle);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.07);
-      border-color: rgba(255, 255, 255, 0.15);
-    }
-
-    .btn-sm {
-      padding: 7px 14px;
-      font-size: 0.8125rem;
-    }
-
-    .btn-lg {
-      padding: 14px 28px;
-      font-size: 1rem;
-    }
-
-    /* Mobile Menu Toggle */
-    .mobile-menu-btn {
-      display: none;
-      background: transparent;
-      border: none;
-      color: var(--text-secondary);
-      cursor: pointer;
-      padding: 8px;
-    }
-
-    /* Mobile Drawer */
-    .mobile-drawer {
-      display: none;
-      position: fixed;
-      top: 72px;
-      left: 0;
-      right: 0;
-      background: var(--bg-canvas);
-      border-bottom: 1px solid var(--border-subtle);
-      padding: 24px;
-      flex-direction: column;
-      gap: 16px;
-      z-index: 49;
-    }
-
-    .mobile-drawer.active {
-      display: flex;
-    }
-
-    /* Hero Section */
-    .hero-section {
-      padding: 80px 0 72px;
-      position: relative;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 48px;
-      align-items: center;
-    }
-
-    .hero-kicker {
-      font-size: 0.8125rem;
-      font-weight: 600;
-      color: var(--accent-sky);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 16px;
-      display: block;
-    }
-
-    .hero-title {
-      font-size: clamp(2.35rem, 4.4vw, 3.75rem);
-      font-weight: 800;
-      line-height: 1.12;
-      color: var(--text-primary);
-      margin-bottom: 24px;
-    }
-
-    .hero-description {
-      font-size: 1.125rem;
-      line-height: 1.65;
-      color: var(--text-secondary);
-      max-width: 620px;
-      margin-bottom: 32px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 40px;
-    }
-
-    /* Proof Inline Strip (Adjacency Rule) */
-    .proof-strip {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.8125rem;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border-subtle);
-      padding-top: 24px;
-    }
-
-    .proof-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .proof-separator {
-      color: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Hero Visual Card */
-    .hero-visual-card {
-      position: relative;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
-      overflow: hidden;
-    }
-
-    .hero-visual-img {
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      margin-bottom: 20px;
-      display: block;
-    }
-
-    .hero-metric-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    .metric-cell {
-      background: var(--bg-surface-subtle);
-      border: 1px solid var(--border-subtle);
-      border-radius: 10px;
-      padding: 12px 14px;
-    }
-
-    .metric-val {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.2;
-    }
-
-    .metric-lbl {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    /* Section Headers */
-    .section-wrap {
-      padding: 96px 0;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    .section-header {
-      max-width: 760px;
-      margin-bottom: 48px;
-    }
-
-    .section-num {
-      font-size: 0.8125rem;
-      font-weight: 600;
-      color: var(--accent-indigo);
-      letter-spacing: 0.05em;
-      margin-bottom: 12px;
-      display: block;
-    }
-
-    .section-title {
-      font-size: clamp(1.85rem, 3.2vw, 2.65rem);
-      font-weight: 700;
-      line-height: 1.2;
-      color: var(--text-primary);
-      margin-bottom: 16px;
-    }
-
-    .section-subhead {
-      font-size: 1.0625rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* Comparison Table / Split */
-    .comparison-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    .comparison-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 32px;
-    }
-
-    .comparison-card.highlight {
-      background: linear-gradient(180deg, rgba(99, 102, 241, 0.08) 0%, var(--bg-surface) 100%);
-      border-color: rgba(99, 102, 241, 0.35);
-    }
-
-    .comparison-badge {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 12px;
-      display: block;
-    }
-
-    .comparison-card h3 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    .comparison-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .comparison-list li {
-      font-size: 0.9375rem;
-      color: var(--text-secondary);
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      line-height: 1.5;
-    }
-
-    .comparison-list svg {
-      flex-shrink: 0;
-      margin-top: 3px;
-    }
-
-    /* Four Spheres Tabbed Section */
-    .spheres-container {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 32px;
-    }
-
-    .spheres-nav {
-      display: flex;
-      gap: 8px;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 6px;
-      border-radius: 12px;
-      border: 1px solid var(--border-subtle);
-      margin-bottom: 32px;
-      overflow-x: auto;
-    }
-
-    .sphere-tab-btn {
-      flex: 1;
-      padding: 10px 16px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      border-radius: 8px;
-      border: none;
-      background: transparent;
-      color: var(--text-secondary);
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.15s ease;
-      text-align: center;
-    }
-
-    .sphere-tab-btn.active {
-      background: var(--bg-surface-elevated);
-      color: #ffffff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .sphere-content-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 36px;
-      align-items: center;
-    }
-
-    .sphere-visual {
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid var(--border-subtle);
-      background: var(--bg-surface-elevated);
-    }
-
-    .sphere-visual img {
-      width: 100%;
-      height: 320px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .sphere-rubrics {
-      margin-top: 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .rubric-box {
-      background: var(--bg-surface-subtle);
-      border: 1px solid var(--border-subtle);
-      border-radius: 10px;
-      padding: 12px 14px;
-    }
-
-    .rubric-title {
-      font-size: 0.8125rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 4px;
-    }
-
-    .rubric-desc {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    /* Interactive Simulator */
-    .simulator-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 40px;
-      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
-    }
-
-    .sim-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 40px;
-      align-items: center;
-    }
-
-    .sim-slider-wrap {
-      margin: 28px 0;
-    }
-
-    .sim-slider-label {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 12px;
-    }
-
-    .sim-score-display {
-      font-size: 2.25rem;
-      font-weight: 800;
-      color: var(--accent-indigo);
-    }
-
-    input[type=range].nps-slider {
-      width: 100%;
-      height: 8px;
-      border-radius: 4px;
-      background: #1e293b;
-      outline: none;
-      appearance: none;
-      -webkit-appearance: none;
-      cursor: pointer;
-    }
-
-    input[type=range].nps-slider::-webkit-slider-thumb {
-      appearance: none;
-      -webkit-appearance: none;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--accent-indigo);
-      border: 3px solid #ffffff;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-      cursor: grab;
-      transition: transform 0.1s ease;
-    }
-
-    input[type=range].nps-slider::-webkit-slider-thumb:hover {
-      transform: scale(1.15);
-    }
-
-    .nps-ticks {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 10px;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      font-family: var(--font-mono);
-    }
-
-    .sim-classification {
-      padding: 16px;
-      border-radius: 12px;
-      background: var(--bg-surface-subtle);
-      border: 1px solid var(--border-subtle);
-      margin-top: 20px;
-    }
-
-    .sim-stat-box {
-      background: var(--bg-surface-elevated);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 24px;
-    }
-
-    .formula-line {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--border-subtle);
-      font-size: 0.875rem;
-    }
-
-    .formula-line:last-child {
-      border-bottom: none;
-      padding-top: 16px;
-      font-weight: 700;
-      font-size: 1.125rem;
-      color: var(--text-primary);
-    }
-
-    .ratio-bar {
-      height: 8px;
-      border-radius: 4px;
-      display: flex;
-      overflow: hidden;
-      margin: 16px 0;
-      background: #1e293b;
-    }
-
-    .ratio-detractors {
-      background: var(--accent-rose);
-      height: 100%;
-      transition: width 0.25s ease;
-    }
-
-    .ratio-passives {
-      background: var(--accent-amber);
-      height: 100%;
-      transition: width 0.25s ease;
-    }
-
-    .ratio-promoters {
-      background: var(--accent-emerald);
-      height: 100%;
-      transition: width 0.25s ease;
-    }
-
-    /* Architecture Bento Grid */
-    .bento-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .bento-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .bento-card.span-2 {
-      grid-column: span 2;
-    }
-
-    .bento-card h4 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin: 16px 0 8px;
-      color: var(--text-primary);
-    }
-
-    .bento-card p {
-      font-size: 0.9375rem;
-      color: var(--text-secondary);
-      line-height: 1.55;
-    }
-
-    .bento-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-top: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    /* Pricing Section */
-    .pricing-toggle-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 40px;
-    }
-
-    .pricing-toggle {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      padding: 4px;
-      display: inline-flex;
-    }
-
-    .toggle-btn {
-      padding: 6px 14px;
-      font-size: 0.8125rem;
-      font-weight: 600;
-      border-radius: 6px;
-      border: none;
-      background: transparent;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .toggle-btn.active {
-      background: var(--bg-surface-elevated);
-      color: #ffffff;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .pricing-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 36px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .pricing-card.featured {
-      background: linear-gradient(180deg, rgba(99, 102, 241, 0.08) 0%, var(--bg-surface) 100%);
-      border-color: rgba(99, 102, 241, 0.4);
-      box-shadow: 0 16px 36px rgba(99, 102, 241, 0.12);
-    }
-
-    .price-num {
-      font-size: 3rem;
-      font-weight: 800;
-      color: var(--text-primary);
-      line-height: 1;
-      margin: 20px 0 6px;
-    }
-
-    .price-sub {
-      font-size: 0.8125rem;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
-
-    .feature-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-bottom: 32px;
-    }
-
-    .feature-list li {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    /* FAQ Accordion */
-    .faq-accordion {
-      max-width: 860px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .faq-item {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: border-color 0.15s ease;
-    }
-
-    .faq-item.open {
-      border-color: rgba(99, 102, 241, 0.35);
-    }
-
-    .faq-question {
-      width: 100%;
-      padding: 20px 24px;
-      background: transparent;
-      border: none;
-      color: var(--text-primary);
-      font-family: var(--font-display);
-      font-size: 1.0625rem;
-      font-weight: 600;
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .faq-chevron {
-      transition: transform 0.2s ease;
-      color: var(--text-muted);
-    }
-
-    .faq-item.open .faq-chevron {
-      transform: rotate(180deg);
-      color: var(--accent-indigo);
-    }
-
-    .faq-answer {
-      display: none;
-      padding: 0 24px 20px;
-      font-size: 0.9375rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .faq-item.open .faq-answer {
-      display: block;
-    }
-
-    /* Final CTA Card */
-    .cta-card {
-      background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent 70%), var(--bg-surface);
-      border: 1px solid rgba(99, 102, 241, 0.3);
-      border-radius: 24px;
-      padding: 64px 48px;
-      text-align: center;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .cta-card h2 {
-      font-size: clamp(2rem, 3.8vw, 3rem);
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-
-    .cta-card p {
-      font-size: 1.125rem;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto 32px;
-    }
-
-    /* Newsletter Lead Capture Form */
-    .lead-form {
-      display: flex;
-      gap: 10px;
-      max-width: 460px;
-      margin: 0 auto 20px;
-    }
-
-    .lead-input {
-      flex: 1;
-      padding: 12px 16px;
-      font-family: var(--font-body);
-      font-size: 0.9375rem;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
-      color: var(--text-primary);
-      outline: none;
-      transition: border-color 0.15s ease;
-    }
-
-    .lead-input:focus {
-      border-color: var(--accent-indigo);
-    }
-
-    .form-feedback {
-      font-size: 0.8125rem;
-      color: var(--accent-emerald);
-      display: none;
-      margin-top: 8px;
-    }
-
-    /* Footer */
-    .footer-bar {
-      border-top: 1px solid var(--border-subtle);
-      padding: 48px 0;
-      color: var(--text-muted);
-      font-size: 0.8125rem;
-    }
-
-    .footer-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 24px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 24px;
-      list-style: none;
-    }
-
-    .footer-links a:hover {
-      color: var(--text-primary);
-    }
-
-    /* Responsive Queries */
-    @media (max-width: 1024px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
-      .bento-grid {
-        grid-template-columns: 1fr;
-      }
-      .bento-card.span-2 {
-        grid-column: span 1;
-      }
-      .sphere-content-grid {
-        grid-template-columns: 1fr;
-      }
-      .sim-grid {
-        grid-template-columns: 1fr;
-      }
-      .pricing-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-      .mobile-menu-btn {
-        display: block;
-      }
-      .comparison-grid {
-        grid-template-columns: 1fr;
-      }
-      .lead-form {
-        flex-direction: column;
-      }
-      .cta-card {
-        padding: 40px 24px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
@@ -1008,7 +46,7 @@
 
         <!-- Zone 3: 1 Primary Action -->
         <div class="nav-actions">
-          <a href="/" class="btn btn-primary btn-sm">Launch Web App</a>
+          <a href="https://play.google.com/store/apps/details?id=io.spherate.app" class="btn btn-primary btn-sm">Get it on Google Play</a>
           <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Navigation Menu">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="3" y1="12" x2="21" y2="12" />
@@ -1028,7 +66,7 @@
     <a href="#architecture" class="nav-link mobile-link">Privacy</a>
     <a href="#pricing" class="nav-link mobile-link">Pricing</a>
     <a href="#faq" class="nav-link mobile-link">FAQ</a>
-    <a href="/" class="btn btn-primary" style="margin-top: 8px;">Launch Web App</a>
+    <a href="https://play.google.com/store/apps/details?id=io.spherate.app" class="btn btn-primary" style="margin-top: 8px;">Get it on Google Play</a>
   </div>
 
   <!-- Hero Section -->
@@ -1044,7 +82,7 @@
           </p>
           
           <div class="hero-actions">
-            <a href="/" class="btn btn-primary btn-lg">Launch Web App</a>
+            <a href="https://play.google.com/store/apps/details?id=io.spherate.app" class="btn btn-primary btn-lg">Get it on Google Play</a>
             <a href="#simulator" class="btn btn-secondary btn-lg">Explore NPS Simulator</a>
           </div>
 
@@ -1076,7 +114,7 @@
         <div>
           <div class="hero-visual-card">
             <img 
-              src="/assets/images/sphe_hero_abstract_1793790211867.jpg" 
+              src="assets/sphe_hero_abstract_1793790211867.jpg" 
               alt="spheRate 4-Sphere Reputation Vault" 
               class="hero-visual-img"
               loading="eager"
@@ -1205,7 +243,7 @@
           <div class="sphere-visual">
             <img 
               id="sphereImg" 
-              src="/assets/images/sphe_sphere_workspace_1793790212154.jpg" 
+              src="assets/sphe_sphere_workspace_1793790212154.jpg" 
               alt="spheRate Sphere Showcase" 
             />
           </div>
@@ -1313,11 +351,11 @@
             <span style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--accent-sky); letter-spacing: 0.08em;">Local Storage</span>
             <h4>Your Data Stays On Your Device</h4>
             <p>
-              spheRate keeps your vault in your device's own app storage, and the app's own code makes no network connections. The only thing that talks to the internet on your behalf is Google Play, if you subscribe to Pro. The spheRate developers keep no copy of your records. spheRate does not add its own encryption, so your data is protected by your device lock. Export a backup file to keep it safe.
+              spheRate keeps your vault in your device's own app storage and makes no network connections. The spheRate developers keep no copy of your records. spheRate does not add its own encryption, so your data is protected by your device lock. Export a backup file to keep it safe.
             </p>
           </div>
           <img 
-            src="/assets/images/sphe_security_vault_1793790212210.jpg" 
+            src="assets/sphe_security_vault_1793790212210.jpg" 
             alt="spheRate Titanium Security Architecture" 
           />
         </div>
@@ -1371,10 +409,17 @@
         <span class="section-num">05. Transparent Investment</span>
         <h2 class="section-title">Invest in Your Lifetime Reputation</h2>
         <p class="section-subhead">
-          Start with zero commitment. Subscribe to Pro in the Android app for deeper insights, reminders and PDF reports when you're ready.
+          Start with zero commitment. Upgrade to deeper insights, reminders and PDF reports when you're ready.
         </p>
       </div>
 
+      <!-- Billing Switcher -->
+      <div class="pricing-toggle-wrap">
+        <div class="pricing-toggle">
+          <button class="toggle-btn active" id="btnBillingAnnual">Annual (Save 20%)</button>
+          <button class="toggle-btn" id="btnBillingMonthly">Monthly</button>
+        </div>
+      </div>
 
       <div class="pricing-grid">
         <!-- Solo Vault (Free) -->
@@ -1386,27 +431,23 @@
             <ul class="feature-list">
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Unlimited peer reviews and feedback entries</span>
+                <span>Up to 15 Peer Reviews</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Four life spheres, Personal NPS gauge and feedback stream</span>
+                <span>Full 4-Sphere Breakdown (Prof, Edu, Pers, Civic)</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>360° invite links: raters reply by email or message (no spheRate server)</span>
+                <span>Local-First Storage (no spheRate servers)</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Quarterly goals and calendar (.ics) export</span>
+                <span>JSON Backup Export & Import</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Local-first storage (no spheRate servers)</span>
-              </li>
-              <li>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>JSON backup export &amp; import</span>
+                <span>Interactive NPS Calculator & Trait Analyzer</span>
               </li>
             </ul>
           </div>
@@ -1417,28 +458,32 @@
         <div class="pricing-card featured">
           <div>
             <span style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--accent-indigo); letter-spacing: 0.08em;">Continuous Pro</span>
-            <div class="price-num tabular-nums" id="proPriceVal">Monthly</div>
-            <div class="price-sub" id="proPricePeriod">Subscription billed monthly through Google Play. The price is shown in Google Play before you subscribe. Cancel anytime in Google Play.</div>
+            <div class="price-num tabular-nums" id="proPriceVal">$76<span style="font-size: 1rem; font-weight: 500; color: var(--text-muted);">/yr</span></div>
+            <div class="price-sub" id="proPricePeriod">Billed annually ($6.33/mo equivalent)</div>
             <ul class="feature-list">
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Per-sphere analytics, trendlines and relationship breakdowns</span>
+                <span><strong>Unlimited</strong> Peer Reviews & Spheres</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Behavioral traits cloud with matching entries</span>
+                <span>Monthly Review Reminders &amp; PDF Reports</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Month-end review reminders (phone notifications)</span>
+                <span>Quarterly Behavioral Growth Coaching & Insights</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>PDF report export</span>
+                <span>RFC 5545 Calendar Integration (.ics)</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Content Integrity Checksums</span>
               </li>
             </ul>
           </div>
-          <a href="/" class="btn btn-primary" style="width: 100%;">Open the app to upgrade</a>
+          <a href="/?tier=pro" class="btn btn-primary" style="width: 100%;">Upgrade to Pro Vault</a>
         </div>
       </div>
     </div>
@@ -1519,22 +564,8 @@
           Start collecting private 360° feedback today.
         </p>
 
-        <!-- Newsletter / Early Access Capture Form -->
-        <form class="lead-form" id="leadForm">
-          <input 
-            type="email" 
-            class="lead-input" 
-            id="leadEmail" 
-            placeholder="Enter your email address" 
-            required 
-            aria-label="Email address for release updates" 
-          />
-          <button type="submit" class="btn btn-primary">Join Release List</button>
-        </form>
-        <div class="form-feedback" id="leadFeedback">Thank you! You have been added to the sovereign release list.</div>
-
         <div style="margin-top: 32px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
-          <a href="/" class="btn btn-primary btn-lg">Launch Web App Now</a>
+          <a href="https://play.google.com/store/apps/details?id=io.spherate.app" class="btn btn-primary btn-lg">Get it on Google Play</a>
           <a href="#simulator" class="btn btn-secondary btn-lg">Try Live Simulator</a>
         </div>
       </div>
@@ -1554,20 +585,19 @@
           </div>
           <span style="font-weight: 700; color: var(--text-primary);">spheRate</span>
           <span>·</span>
-          <span>v1.0 Sovereign Edition</span>
+          <span>v1.0</span>
         </div>
 
         <ul class="footer-links">
-          <li><a href="/">Launch App</a></li>
           <li><a href="#spheres">Spheres</a></li>
           <li><a href="#architecture">Architecture</a></li>
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="#faq">FAQ</a></li>
-          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
         </ul>
 
         <div>
-          &copy; <span id="yearVal">2026</span> spheRate. Personal Feedback Vault.
+          &copy; <span id="yearVal">2026</span> Business Research & Applications Limited
         </div>
       </div>
     </div>
@@ -1738,6 +768,28 @@
           updateSimulator(e.target.value);
         });
         updateSimulator(npsSlider.value); // first paint always matches the script
+      }
+
+      // 5. Billing Toggle
+      const btnBillingAnnual = document.getElementById('btnBillingAnnual');
+      const btnBillingMonthly = document.getElementById('btnBillingMonthly');
+      const proPriceVal = document.getElementById('proPriceVal');
+      const proPricePeriod = document.getElementById('proPricePeriod');
+
+      if (btnBillingAnnual && btnBillingMonthly && proPriceVal && proPricePeriod) {
+        btnBillingAnnual.addEventListener('click', function () {
+          btnBillingAnnual.classList.add('active');
+          btnBillingMonthly.classList.remove('active');
+          proPriceVal.innerHTML = '$76<span style="font-size: 1rem; font-weight: 500; color: var(--text-muted);">/yr</span>';
+          proPricePeriod.textContent = 'Billed annually ($6.33/mo equivalent)';
+        });
+
+        btnBillingMonthly.addEventListener('click', function () {
+          btnBillingMonthly.classList.add('active');
+          btnBillingAnnual.classList.remove('active');
+          proPriceVal.innerHTML = '$8<span style="font-size: 1rem; font-weight: 500; color: var(--text-muted);">/mo</span>';
+          proPricePeriod.textContent = 'Billed monthly. Cancel anytime.';
+        });
       }
 
       // 6. Interactive FAQ Accordion
