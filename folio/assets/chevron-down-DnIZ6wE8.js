@@ -1,0 +1,1 @@
+import{y as e}from"./index-D_v3Gume.js";var t=e(`chevron-down`,[[`path`,{d:`m6 9 6 6 6-6`,key:`qrunsl`}]]);export{t};
