@@ -1,5 +1,32 @@
 const CACHE_NAME = 'folio-app-cache-v1';
 const APP_SHELL_URLS = ['./', './index.html'];
+// Replaced at build time (vite.config.ts) with a hash of the asset manifest. This makes sw.js
+// byte-different on every deploy, which is what makes the browser install the new worker and
+// run `activate` (where stale hashed assets are pruned).
+const BUILD_ID = '964bdf4a4d6b162b';
+const MANIFEST_URL = './asset-manifest.json';
+
+// Removes cached /assets/* files that the current build no longer ships, so the cache doesn't
+// grow by ~7 MB (the WebLLM + PDF.js workers) on every deploy. Never throws; if the manifest
+// can't be read the cache is simply left alone until the next activation.
+async function pruneStaleAssets() {
+  try {
+    const res = await fetch(MANIFEST_URL, { cache: 'no-store' });
+    if (!res.ok) return;
+    const manifest = await res.json();
+    if (!manifest || !Array.isArray(manifest.assets) || manifest.assets.length === 0) return;
+    const keep = new Set(manifest.assets.map((a) => new URL(a, self.registration.scope).pathname));
+    const cache = await caches.open(CACHE_NAME);
+    for (const request of await cache.keys()) {
+      const url = new URL(request.url);
+      if (url.origin === self.location.origin && url.pathname.includes('/assets/') && !keep.has(url.pathname)) {
+        await cache.delete(request);
+      }
+    }
+  } catch {
+    // Pruning is best-effort.
+  }
+}
 
 let cacheServedCount = 0;
 
@@ -21,7 +48,8 @@ function isCacheableSameOriginRequest(request) {
     path.includes('/@id/') ||
     path.includes('/@fs/') ||
     path.includes('__vite_ping') ||
-    path.endsWith('/sw.js')
+    path.endsWith('/sw.js') ||
+    path.endsWith('/asset-manifest.json')
   ) {
     return false;
   }
@@ -84,7 +112,10 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches
       .open(CACHE_NAME)
-      .then((cache) => cache.addAll(APP_SHELL_URLS))
+      .then((cache) =>
+        // `reload` bypasses the HTTP cache so the shell always matches the assets this build ships.
+        cache.addAll(APP_SHELL_URLS.map((u) => new Request(u, { cache: 'reload' })))
+      )
       .catch(() => {})
       .then(() => self.skipWaiting())
   );
@@ -101,6 +132,7 @@ self.addEventListener('activate', (event) => {
             .map((name) => caches.delete(name))
         )
       )
+      .then(() => pruneStaleAssets())
       .then(() => self.clients.claim())
       .then(async () => {
         const clients = await self.clients.matchAll({
