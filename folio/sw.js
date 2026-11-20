@@ -3,7 +3,7 @@ const APP_SHELL_URLS = ['./', './index.html'];
 // Replaced at build time (vite.config.ts) with a hash of the asset manifest. This makes sw.js
 // byte-different on every deploy, which is what makes the browser install the new worker and
 // run `activate` (where stale hashed assets are pruned).
-const BUILD_ID = '964bdf4a4d6b162b';
+const BUILD_ID = 'dccad07dd3c0b91e';
 const MANIFEST_URL = './asset-manifest.json';
 
 // Removes cached /assets/* files that the current build no longer ships, so the cache doesn't
